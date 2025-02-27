@@ -1,27 +1,80 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primary-color: #e7ecef; /* Light Grayish Blue */
+  --secondary-color: #274c77; /* Dark Blue */
+  --accent-color: #6096ba; /* Medium Blue */
+  --accent-light: #6096ba99;
+  --highlight-color: #d7e9f9; /* Light Blue */
+  --neutral-color: #373737; /* Gray */
+  --light-color: #fff;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+  background-color: var(--primary-color) !important;
+  overflow-x: hidden;
 }
+
+a {
+  text-decoration: none !important;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.card,
+.card-img,
+.card-img-top {
+  border-radius: 0 !important;
+}
+
+.card-footer {
+  background-color: transparent !important;
+  border-top: none !important;
+}
+
+.custom-text-truncate-5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+.custom-text-truncate-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.btn {
+  border-radius: 0 !important;
+}
+
+.accent-btn.btn-primary {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--light-color) !important;
+}
+.accent-btn.btn-primary:hover,
+.accent-btn.btn-primary:focus,
+.accent-btn.btn-primary:active,
+.accent-btn.btn-primary:active:focus {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--light-color);
+  box-shadow: 0 0 0 0.1rem var(--accent-light) !important;
+  transform: all 200ms ease;
+}
+
+p {
+  color: var(--neutral-color);
+  font-size: clamp(14px, 4vw, 16px);
+}
+

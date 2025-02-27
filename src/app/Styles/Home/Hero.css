@@ -1,0 +1,71 @@
+.hero-section {
+  height: calc(100vh - 0px);
+}
+.hero-outer-box {
+  height: 100vh;
+  position: absolute !important;
+  top: 0px;
+  left: 0;
+  right: 0;
+}
+.hero-contanier {
+  height: 100vh;
+  width: 100%;
+}
+
+.hero-section img {
+  object-fit: cover;
+  object-position: right;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.carousel-content {
+  position: absolute;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.hero-bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  border-radius: 50%;
+  padding: 20px;
+  background-size: 80% 80% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-next-icon:hover,
+.carousel-control-prev-icon:hover {
+  background-color: rgba(69, 69, 69, 0.515) !important;
+  width: 3rem !important;
+  height: 3rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.hero-section h1 {
+  font-size: clamp(2.5rem, 5vw, 6rem);
+}
+.hero-section p {
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
+  font-style: italic;
+  font-family: 'Crimson Text', serif;
+  color: var(--primary-color);
+}

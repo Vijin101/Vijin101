@@ -1,0 +1,21 @@
+.top-background{
+    min-height: 250px;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.top-background-content{
+    padding-top: 120px;
+    color: var(--primary-color);
+}
+
+.top-background-content p{
+    color: var(--primary-color);
+    opacity: 0.9;
+    font-weight: 300;
+}

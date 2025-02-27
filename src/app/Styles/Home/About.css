@@ -1,0 +1,40 @@
+.about-section {
+  padding: 100px 0px;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+}
+
+.about-section img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.about-section p {
+  text-align: justify;
+}
+
+h5.home-section-title {
+  position: relative;
+  display: inline;
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+h5.home-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background-color: red;
+  margin: 0 auto;
+}
+
+h3.home-section-desc {
+  margin-top: 5px;
+  color: var(--secondary-color);
+}

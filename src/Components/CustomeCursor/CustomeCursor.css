@@ -1,0 +1,24 @@
+.custom-cursor {
+  width: 24px; /* Adjust the cursor width */
+  height: 24px; /* Adjust the cursor height */
+  /* background-image: url('path-to-your-cursor-image.png'); Replace with your cursor image path */
+  background-size: cover;
+  position: absolute;
+  pointer-events: none; /* Ensures the cursor doesn't interfere with underlying elements */
+  z-index: 9999; /* Ensures the cursor is above other elements */
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1px solid var(--secondary-color);
+}
+
+a:-webkit-any-link + .custom-cursor {
+  width: 76px !important; /* Larger cursor width on hover */
+  height: 76px !important; /* Larger cursor height on hover */
+}
+
+@media (hover: none) {
+  /* Remove cursor animation on touch devices */
+  .custom-cursor {
+    display: none;
+  }
+}

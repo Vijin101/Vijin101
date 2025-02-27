@@ -1,0 +1,78 @@
+.verse-section {
+  position: relative;
+
+  min-height: 500px;
+  overflow: hidden;
+  background-image: url('../../../../public/assets/versebg.jpg');
+  background-size: cover;
+  background-position: 90%;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 100px 0;
+}
+
+.verse-section-title h5 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  padding-bottom: 20px;
+}
+
+.verse-section-content p {
+  font-size: clamp(18px, 4vw, 22px);
+  color: var(--primary-color);
+}
+
+p.verse-section-footer {
+  font-size: 16px;
+}
+
+.shape-fill {
+  fill: var(--primary-color);
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+
+.shape-top {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 100%;
+  line-height: 0;
+  direction: ltr;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.shape-bottom {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  line-height: 0;
+  direction: ltr;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.verse-bg-layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 21, 47, 0.86);
+  z-index: 0;
+}
+
+.verse-container {
+  position: relative;
+  z-index: 1;
+}

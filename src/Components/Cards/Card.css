@@ -1,0 +1,149 @@
+.worship-card.card {
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  position: relative;
+  z-index: 100;
+  /* background-color: var(--accent-color); */
+}
+
+.worship-card-img {
+  padding: 2px;
+  border-radius: 5px !important;
+}
+
+.worship-card-body {
+  /* background-color: var(--accent-color); */
+}
+
+.worship-card-title {
+  color: var(--secondary-color);
+  text-transform: uppercase;
+}
+
+.worship-card-text {
+  margin: 0 !important;
+}
+
+.worship-card-text svg {
+  vertical-align: -4px;
+  font-size: 20px;
+}
+
+/* SERMON CARD */
+
+.sermon-card {
+  background-color: var(--secondary-color);
+}
+
+.sermon-card-body {
+  position: relative;
+  background-color: var(--secondary-color);
+}
+
+.sermon-card-title {
+  color: var(--primary-color);
+  text-transform: capitalize;
+}
+
+.sermon-card-img {
+  padding: 3px;
+  background-color: var(--secondary-color);
+}
+
+.sermon-card-publish {
+  position: absolute;
+  max-width: 80px;
+  top: -70%;
+  background-color: var(--primary-color);
+  right: 5px;
+  text-align: center;
+  color: var(--neutral-color);
+}
+
+.sermon-card-month {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0px 10px 0px 10px;
+  background-color: var(--secondary-color);
+  color: var(--highlight-color);
+}
+
+.sermon-card-date {
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+  padding-top: 3px;
+}
+
+.sermon-card-year {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0px 10px 0px 10px;
+}
+
+/* BLOG CARD */
+
+.blog-card {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.blog-card-img {
+  max-height: 200px;
+  min-height: 200px;
+  object-fit: cover;
+}
+
+.blog-card-subcontent {
+  font-size: 14px;
+}
+
+.blog-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blog-card-avatar {
+  border: 2px solid var(--accent-color);
+}
+
+.blog-card-title {
+  color: var(--secondary-color);
+  text-transform: capitalize;
+}
+
+.blog-card-desc {
+  color: var(--neutral-color);
+  /* font-size: 16px; */
+}
+
+.blog-card-username {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-color);
+}
+
+.blog-card-avatar {
+  height: 30px;
+}
+
+
+/* Event-card */
+
+.event-card .event-date-box{
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 0;
+
+}
+
+.event-date-box-header, .event-date-box-footer{
+  background-color: var(--accent-color);
+  font-weight: 500;
+}
+
+.event-date-box-body{
+  font-size: 2rem;
+  font-weight: 800;
+}
