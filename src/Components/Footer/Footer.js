@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import './Footer.css';
@@ -20,10 +21,10 @@ const Footer = () => {
           <Col className="border-start ps-4">
             <h6 className="fw-bold mb-3">Quick Links</h6>
             <ul className="list-unstyled">
-              <li><Link href={'/'} className="">About us</Link></li>
-              <li><Link href={'/'} className="">Events</Link></li>
-              <li><Link href={'/'} className="">Gallery</Link></li>
-              <li><Link href={'/'} className="">Blog</Link></li>
+              <li><Link href="/">About us</Link></li>
+              <li><Link href="/">Events</Link></li>
+              <li><Link href="/">Gallery</Link></li>
+              <li><Link href="/">Blog</Link></li>
             </ul>
           </Col>
           <Col className="border-start ps-4">
@@ -49,18 +50,17 @@ const Footer = () => {
 
         <Row className="py-4 border-bottom">
           <Col className="d-flex justify-content-center gap-3">
-            <Link href="https://www.facebook.com" target="_blank">
-              <FaFacebookF className=" fs-1" />
+            <Link href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <FaFacebookF className="fs-1" />
             </Link>
-            <Link href="https://www.instagram.com" target="_blank">
-              <FaInstagram className=" fs-1" />
+            <Link href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <FaInstagram className="fs-1" />
             </Link>
-            <Link href="https://www.youtube.com" target="_blank">
-              <FaYoutube className=" fs-1" />
+            <Link href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+              <FaYoutube className="fs-1" />
             </Link>
           </Col>
         </Row>
-
 
         <Row className="pt-3">
           <Col className="text-center footer-copyright">
