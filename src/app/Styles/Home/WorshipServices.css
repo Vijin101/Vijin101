@@ -1,13 +1,9 @@
 .worship-section {
   padding: 50px 0;
-
-  background-color: var(--highlight-color);
+  background-color: var(--bg-hover-light);
   min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
-}
-
-.marquee-container {
 }
 
 .marquee-content {

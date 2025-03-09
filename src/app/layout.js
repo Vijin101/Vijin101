@@ -5,6 +5,7 @@ import Head from "next/head";
 import Footer from "../Components/Footer/Footer";
 import CustomCursor from "../Components/CustomeCursor/CustomCursor";
 import LayoutContextProvider from "../context/LayoutContext";
+import LoadingLineReveal from "../Components/Loading/LoadingLineReveal";
 
 const raleway = Roboto({
   subsets: ["latin"],
@@ -28,10 +29,12 @@ export default function RootLayout({ children }) {
       <body className={raleway.className}>
         {/* hi */}
         <LayoutContextProvider>
-          <Header />
-          <CustomCursor />
-          {children}
-          <Footer />
+          <LoadingLineReveal delay={0.5} >
+            <Header />
+            <CustomCursor />
+            {children}
+            <Footer />
+          </LoadingLineReveal>
         </LayoutContextProvider>
       </body>
     </html>

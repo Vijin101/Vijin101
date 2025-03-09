@@ -18,16 +18,16 @@ const SermonCard = ({ video }) => {
         alt={video.snippet.title}
         className="sermon-card-img"
       />
-      <Card.Body className="sermon-card-body">
-        <div className="sermon-card-publish">
-          <div className="sermon-card-month">{month}</div>
-          <div className="sermon-card-date">{date}</div>
-          <div className="sermon-card-year">{year}</div>
-        </div>
-        <Card.Title className="sermon-card-title">
+      {/* <Card.Body className="sermon-card-body"> */}
+      <div className="sermon-card-publish">
+        <div className="sermon-card-month">{month}</div>
+        <div className="sermon-card-date">{date}</div>
+        <div className="sermon-card-year">{year}</div>
+      </div>
+      {/* <Card.Title className="sermon-card-title">
           {video.snippet.title}
-        </Card.Title>
-      </Card.Body>
+        </Card.Title> */}
+      {/* </Card.Body> */}
     </Card>
   );
 };

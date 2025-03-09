@@ -1,43 +1,76 @@
-.worship-card.card {
-  overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+.worship-card {
   position: relative;
   z-index: 100;
-  /* background-color: var(--accent-color); */
+  overflow: hidden;
+  backdrop-filter: blur(12px) !important; /* Stronger blur */
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3) !important; /* Slightly stronger border */
+  box-shadow: rgba(255, 255, 255, 0.15) 0px 4px 6px,
+    rgba(0, 0, 0, 0.1) 0px 1px 3px !important;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.worship-card:hover {
+  transform: translateY(-5px);
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 8px;
+}
+
+.worship-card-img-wrapper {
+  width: 100%;
+  /* height: 180px; */
+  overflow: hidden;
 }
 
 .worship-card-img {
-  padding: 2px;
-  border-radius: 5px !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .worship-card-body {
-  /* background-color: var(--accent-color); */
+  padding: 15px;
+  text-align: center;
+  background-color: var(--bg-main);
 }
 
 .worship-card-title {
-  color: var(--secondary-color);
+  color: var(--primary-color) !important;
   text-transform: uppercase;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  font-family: var(--font-title);
 }
 
 .worship-card-text {
-  margin: 0 !important;
+  margin: 5px 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  gap: 5px;
 }
 
 .worship-card-text svg {
-  vertical-align: -4px;
-  font-size: 20px;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--secondary-color);
 }
 
 /* SERMON CARD */
 
 .sermon-card {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
+  position: relative;
 }
 
 .sermon-card-body {
   position: relative;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
+  padding: 0 !important;
 }
 
 .sermon-card-title {
@@ -47,17 +80,17 @@
 
 .sermon-card-img {
   padding: 3px;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
 .sermon-card-publish {
   position: absolute;
   max-width: 80px;
-  top: -70%;
-  background-color: var(--primary-color);
-  right: 5px;
+  bottom: 3px; /* Moves the label to the bottom */
+  right: 3px; /* Keeps it aligned to the right */
+  background-color: var(--accent-dark);
   text-align: center;
-  color: var(--neutral-color);
+  color: var(--neutral-light);
 }
 
 .sermon-card-month {
@@ -65,7 +98,7 @@
   font-weight: 600;
   padding: 0px 10px 0px 10px;
   background-color: var(--secondary-color);
-  color: var(--highlight-color);
+  color: var(--primary-dark);
 }
 
 .sermon-card-date {
@@ -84,7 +117,15 @@
 /* BLOG CARD */
 
 .blog-card {
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  background-color: var(--bg-light); /* Light background for a clean look */
+  border: 1px solid var(--accent-light); /* Subtle border */
+  border-radius: 8px;
+  box-shadow: 2px 4px 6px var(--accent-dark);
+  transition: 0.3s ease-in-out;
+}
+
+.blog-card:hover {
+  box-shadow: 4px 6px 12px var(--accent-hover);
 }
 
 .blog-card-img {
@@ -94,7 +135,8 @@
 }
 
 .blog-card-subcontent {
-  font-size: 14px;
+  font-size: 0.85rem;
+  color: var(--neutral-dark);
 }
 
 .blog-card-footer {
@@ -108,42 +150,134 @@
 }
 
 .blog-card-title {
-  color: var(--secondary-color);
+  font-family: var(--font-title);
+  color: var(--primary-color);
+  font-size: 1.2rem;
   text-transform: capitalize;
+  font-weight: 600 !important;
 }
 
 .blog-card-desc {
-  color: var(--neutral-color);
-  /* font-size: 16px; */
+  font-family: var(--font-text);
+  color: var(--text-dark);
+  font-size: 0.95rem;
 }
 
 .blog-card-username {
-  font-size: 14px;
   font-weight: 500;
-  color: var(--accent-color);
+
+  font-size: 0.85rem;
+  color: var(--neutral-dark);
 }
 
 .blog-card-avatar {
   height: 30px;
 }
 
-
 /* Event-card */
 
-.event-card .event-date-box{
+/* Base Styles */
+.event-card {
+  background: rgba(255, 255, 255, 0.2); /* Glass effect */
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  will-change: transform, opacity;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Event Image */
+.event-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Event Details */
+.event-title {
+  font-family: var(--font-title);
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: var(--primary-dark);
+  text-transform: uppercase;
+}
+
+.event-description {
+  margin: 5px 0 !important;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+/* Event Date Box */
+.event-date-container {
+  text-align: center;
+}
+
+.event-date-box {
   text-transform: uppercase;
   text-align: center;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  padding: 0;
-
+  padding: 10px;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-light)
+  );
+  border-radius: 2px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.event-date-box-header, .event-date-box-footer{
-  background-color: var(--accent-color);
+.event-date-header {
   font-weight: 500;
+  font-size: 0.9rem;
 }
 
-.event-date-box-body{
+.event-date-body {
   font-size: 2rem;
   font-weight: 800;
+}
+
+.event-date-footer {
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Contact Section */
+.event-contact {
+  text-align: left;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.icon {
+  color: var(--secondary-color);
 }

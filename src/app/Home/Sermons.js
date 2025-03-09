@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import dayjs from 'dayjs';
 import SermonCard from '../../Components/Cards/SermonCard';
+import SectionHeader from '../../Components/Typography/SectionHeader';
 
 const Sermons = () => {
   const apiKey = 'AIzaSyBfS_nwusCkC2hlmvVsajvHwAUpUdL97Io';
@@ -31,10 +32,7 @@ const Sermons = () => {
     <div className="sermons-section">
       <Container>
         <div className="worship-section-header mb-5 text-center">
-          <h5 className="home-section-title">Our Sermons</h5>
-          <h3 className="home-section-desc">
-            Nourish your soul with our uplifting sermons and teachings.
-          </h3>
+          <SectionHeader title={"Our Sermons"} description={"Nourish your soul with our uplifting sermons and teachings."} />
         </div>
         <div className="video-list">
           <Row lg={4} sm={2} xs={1}>

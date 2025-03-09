@@ -1,0 +1,29 @@
+.section-title {
+  font-family: var(--font-title);
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-hover);
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding-bottom: 7px;
+}
+
+.section-desc {
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-top: 10px;
+  letter-spacing: 0.4px;
+}
+
+.dynamic-paragraph {
+  font-family: var(--font-text);
+  font-size: 18px;
+  color: var(--text-dark);
+  max-width: 600px;
+  line-height: 1.6;
+}

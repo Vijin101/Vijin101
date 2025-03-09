@@ -1,5 +1,5 @@
 'use client';
-import './CustomeCursor.css';
+import './CustomCursor.css';
 import { useEffect, useState } from 'react';
 
 const CustomCursor = () => {

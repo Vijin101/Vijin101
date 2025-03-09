@@ -1,5 +1,6 @@
 .header-page {
   min-height: 80px;
+  max-height: 80px;
   position: relative;
   z-index: 100;
   transition: background 0.5s ease-in-out;
@@ -10,18 +11,18 @@
   left: 0;
   right: 0;
   transform: translateY(0);
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   transition: background 0.5s ease-in-out;
 }
 .nav-menu-list .nav-menu-item {
-  color: var(--primary-color);
+  color: var(--bg-main);
 }
 .nav-menu-list .nav-menu-item:hover {
-  color: var(--light-color);
+  color: var(--secondary-color);
 }
 
 .nav-menu-list .nav-menu-item.active {
-  color: var(--light-color);
+  color: var(--secondary-color);
 }
 
 .mobile-menu-list {
@@ -30,7 +31,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   min-height: 100vh;
 }
 
@@ -47,16 +48,69 @@
 }
 
 .mobile-menu-list .nav-menu-item {
-  color: var(--primary-color);
+  color: var(--bg-main);
   display: block;
   text-align: center;
   font-size: 18px;
 }
 
 .mobile-menu-list .nav-menu-item:hover {
-  color: var(--light-color);
+  color: var(--secondary-color);
 }
 
 .mobile-menu-list .nav-menu-item.active {
-  color: var(--light-color);
+  color: var(--secondary-color);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  /* Adjusts space between logo and text */
+}
+
+.church-logo {
+  height: 60px;
+  /* Adjust size as needed */
+}
+
+.church-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.church-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+.church-description {
+  font-size: 0.9rem;
+  color: #e3b505;
+  /* Gold color */
+  margin: 0;
+}
+
+/* Ensure mobile responsiveness */
+@media (max-width: 768px) {
+  .logo-container {
+    /* flex-direction: column;
+    align-items: flex-start; */
+  }
+
+  .church-logo {
+    height: 50px;
+    /* Slightly smaller for mobile */
+  }
+
+  .church-name {
+    font-size: 1rem;
+  }
+
+  .church-description {
+    font-size: 0.8rem;
+  }
 }

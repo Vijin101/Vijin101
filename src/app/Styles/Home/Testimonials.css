@@ -1,21 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&display=swap");
 
 .testimonial-section {
   padding: 100px 0;
-  background-color: var(--highlight-color);
+  background-color: var(--bg-hover-light);
+
   /* min-height: calc(100vh - 80px); */
 }
 
 .testimonial-content {
-  color: var(--neutral-color);
+  color: var(--text-dark);
   font-style: italic;
-  font-family: 'Crimson Text', serif;
+  font-family: var(--font-italic);
   font-size: clamp(16px, 5vw, 20px);
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Limits text to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .testiminial-icon {
   font-size: clamp(30px, 5vw, 60px);
   line-height: 0;
+  color: var(--primary-color);
 }
 
 .testiminial-profile {
@@ -31,9 +38,12 @@
 }
 
 .testiminial-name {
-  font-size: clamp(18px, 5vw, 22px);
+  font-size: 18px;
   padding-top: 5px;
   line-height: 1;
+  text-align: end;
+  font-family: var(--font-italic);
+  color: var(--text-dark);
 }
 
 .testiminial-location {

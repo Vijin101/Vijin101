@@ -10,17 +10,17 @@ const Hero = () => {
     {
       title: 'Welcome to Our Church',
       paragraph: 'Join us in worship and fellowship.',
-      img: '../assets/slide1.jpg',
+      img: '../assets/slide4.jpg',
     },
     {
       title: 'Sunday Services',
       paragraph: 'Experience the presence of god every sunday.',
-      img: '../assets/slide2.jpg',
+      img: '../assets/slide5.jpg',
     },
     {
       title: 'Community Outreach',
       paragraph: 'We are committed to serving our community.',
-      img: '../assets/slide3.jpg',
+      img: '../assets/slide6.jpg',
     },
   ];
 
@@ -76,7 +76,7 @@ const Hero = () => {
                       {e.title.split('').map(
                         (char, id) =>
                           i === index && (
-                            <AnimatePresence  key={id}>
+                            <AnimatePresence key={id}>
                               <motion.span
                                 key={id}
                                 variants={letter}
@@ -109,8 +109,9 @@ const Hero = () => {
                       {e.paragraph.split('').map(
                         (char, id) =>
                           i === index && (
-                            <AnimatePresence  key={id}>
+                            <AnimatePresence key={id}>
                               <motion.span
+                                className='drop-shadow-lg'
                                 key={id}
                                 variants={letter}
                                 exit={letter.hidden}

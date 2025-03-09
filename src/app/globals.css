@@ -1,23 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
 :root {
-  --primary-color: #e7ecef; /* Light Grayish Blue */
-  --secondary-color: #274c77; /* Dark Blue */
-  --accent-color: #6096ba; /* Medium Blue */
-  --accent-light: #6096ba99;
-  --highlight-color: #d7e9f9; /* Light Blue */
-  --neutral-color: #373737; /* Gray */
-  --light-color: #fff;
+  /* Font Families */
+  --font-text: "Poppins", sans-serif;
+  --font-title: "Montserrat", sans-serif;
+  --font-accent: "Roboto", sans-serif;
+  --font-italic: "Crimson Text", serif;
+  /* Optional */
+
+  /* Primary Colors */
+  --primary-color: #1a2e50;
+  --primary-light: #2e4a78;
+  /* Added */
+  --primary-dark: #101b2d;
+  --primary-hover: #15243d;
+  --primary-active: #101b2d;
+
+  /* Secondary Colors */
+  --secondary-color: #e3b505;
+  --secondary-light: #f2c73d;
+  /* Added */
+  --secondary-dark: #b28703;
+  --secondary-hover: #c99a04;
+  --secondary-active: #b28703;
+
+  /* Accent Colors */
+  --accent-color: #8a9bae;
+  /* Renamed for consistency */
+  --accent-light: #a5b7cc;
+  /* Added */
+  --accent-dark: #5e738a;
+  --accent-hover: #75899e;
+  --accent-active: #5e738a;
+
+  /* Background Colors */
+  --bg-main: #f9f5f0;
+  --bg-light: #ffffff;
+  /* Added */
+  --bg-hover-light: #efe8e2;
+  --bg-dark: #2e2e2e;
+  --bg-hover-dark: #3b3b3b;
+  --bg-darker: #1e1e1e;
+  /* Added */
+
+  /* Status Colors */
+  --success-color: #4caf50;
+  --success-light: #81c784;
+  /* Added */
+  --success-dark: #2e7d32;
+  /* Added */
+  --success-hover: #388e3c;
+
+  --warning-color: #e67e22;
+  --warning-light: #f39c12;
+  /* Added */
+  --warning-dark: #d35400;
+  --warning-hover: #d35400;
+
+  --error-color: #c0392b;
+  --error-light: #e57373;
+  /* Added */
+  --error-dark: #922b21;
+  /* Added */
+  --error-hover: #a93226;
+
+  /* Info Colors */
+  --info-color: #3498db;
+  /* Added */
+  --info-light: #5dade2;
+  /* Added */
+  --info-dark: #2c81ba;
+  /* Added */
+
+  /* Neutral Colors */
+  --neutral-light: #d5d8dc;
+  /* Added */
+  --neutral-dark: #626567;
+  /* Added */
+
+  /* Added */
+
+  --text-dark: #2c3e50;
 }
+
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   position: relative;
-  background-color: var(--primary-color) !important;
+  font-family: "Poppins", sans-serif !important;
+  background-color: var(--bg-main) !important;
   overflow-x: hidden;
 }
 
-a {
+a,
+.link-a {
   text-decoration: none !important;
+  color: var(--secondary-color);
 }
 
 ul,
@@ -58,18 +137,18 @@ li {
 }
 
 .accent-btn.btn-primary {
-  background-color: var(--accent-color) !important;
-  border-color: var(--accent-color) !important;
-  color: var(--light-color) !important;
+  background-color: var(--secondary-dark) !important;
+  border-color: var(--secondary-dark) !important;
+  color: var(--bg-main) !important;
 }
 .accent-btn.btn-primary:hover,
 .accent-btn.btn-primary:focus,
 .accent-btn.btn-primary:active,
 .accent-btn.btn-primary:active:focus {
-  background-color: var(--accent-color) !important;
-  border-color: var(--accent-color) !important;
-  color: var(--light-color);
-  box-shadow: 0 0 0 0.1rem var(--accent-light) !important;
+  background-color: var(--secondary-hover) !important;
+  border-color: var(--secondary-hover) !important;
+  color: var(--bg-main);
+  box-shadow: 0 0 0 0.1rem var(--secondary-hover) !important;
   transform: all 200ms ease;
 }
 
@@ -77,4 +156,3 @@ p {
   color: var(--neutral-color);
   font-size: clamp(14px, 4vw, 16px);
 }
-

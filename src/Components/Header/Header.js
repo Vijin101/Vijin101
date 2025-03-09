@@ -36,21 +36,22 @@ const Header = () => {
     };
   }, []);
   const menus = [
-    { name: "Home", path: "/" },
-    { name: "Events", path: "/events" },
-    { name: "About Us", path: "/aboutus" },
-    { name: "Contact Us", path: "/contactus" },
+    { name: "HOME", path: "/" },
+    { name: "EVENTS", path: "/events" },
+    { name: "ABOUT US", path: "/aboutus" },
+    { name: "CONTACT", path: "/contactus" },
   ];
   return (
     <header className={`header-page ${scrolled ? "fixed-header" : ""}`}>
-      <Container className=" h-100 py-3">
+      <Container className=" h-100 py-2">
         <div className="d-flex justify-content-between align-items-center">
-          <div className="col-6 col-md-2">
-            <Link className="d-flex align-items-center" href="/">
-              <div className="col-4 col-md-3">
-                <img src={"/assets/logo.png"} alt={""} className="img-fluid" />
+          <div className="">
+            <Link className="d-flex align-items-center logo-container" href="/">
+              <img src="/assets/logo2.png" alt="Church Logo" className="church-logo" />
+              <div className="church-info">
+                <h1 className="church-name">Christian Evangelical Assembly</h1>
+                <p className="church-description">Vision for Harvest</p>
               </div>
-              <span className="ps-2">My App</span>
             </Link>
           </div>
           <div className="d-none d-md-block">
@@ -62,7 +63,7 @@ const Header = () => {
           <div className="d-none d-md-block">
             <Button className="accent-btn">
               <RiLoginCircleLine className="me-1" />
-              Login
+              LOGIN
             </Button>
           </div>
         </div>

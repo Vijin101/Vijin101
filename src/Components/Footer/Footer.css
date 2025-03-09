@@ -1,4 +1,93 @@
+/* Footer Styling */
 .footer-section {
+  background-color: var(--primary-color); /* Gold background */
+  /* color: var(--bg-light);  */
   padding: 50px 0;
-  background-color: var(--secondary-color);
+  font-family: var(--font-text);
+}
+
+.footer-section a {
+  color: var(--bg-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--secondary-light); /* Lighter gold on hover */
+}
+
+.footer-section h6 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-family: var(--font-title);
+  color: var(--secondary-color);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section .social-icons {
+  display: flex;
+  gap: 15px;
+  font-size: 20px;
+  justify-content: center;
+}
+
+.footer-section .social-icons li {
+  display: inline-block;
+}
+
+.footer-section .social-icons li svg {
+  color: var(--bg-light);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-section .social-icons li:hover svg {
+  transform: scale(1.2);
+  color: var(--primary-color); /* Dark blue on hover */
+}
+
+/* Dividers between columns */
+.footer-section .col-border {
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  padding-left: 20px;
+}
+
+/* Center the logo */
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-logo img {
+  max-width: 120px;
+  margin-bottom: 15px;
+}
+
+.footer-section .copyright {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-italic);
+}
+
+.footer-contact {
+  color: var(--bg-light);
+}
+.footer-about {
+  color: var(--bg-light);
+  font-size: 12px;
+}
+.footer-copyright {
+  color: var(--bg-light);
+  font-size: 16px;
 }

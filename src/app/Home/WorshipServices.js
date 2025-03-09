@@ -12,87 +12,53 @@ import {
 } from 'framer-motion';
 import { useRef, useState } from 'react';
 import WorshipCard from '../../Components/Cards/WorshipCard';
+import SectionHeader from '../../Components/Typography/SectionHeader';
 
 const WorshipServices = () => {
   const services = [
     {
-      service_img: '../assets/about.jpg',
+      service_img: '../assets/sunday_service.webp',
       service_name: 'Sunday Service',
+      service_day: "Sunday",
       service_time: '10:00 AM',
-      service_location: 'Arumani',
+      service_location: 'Y.M.C.A Muzhucode',
     },
     {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
+      service_img: '../assets/mrng_prayer.webp',
+      service_name: 'Morning Prayer',
+      service_day: "Everyday",
+      service_time: '05:00 AM',
+      service_location: 'Google Meet',
     },
     {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
+      service_img: '../assets/youth.webp',
+      service_name: 'Youth Meeting',
+      service_day: "Sunday",
+      service_time: '05:30 PM',
+      service_location: 'Themanoor',
     },
     {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
+      service_img: '../assets/bible_study.webp',
+      service_name: 'Bible Study',
+      service_day: "Thursday",
+      service_time: '07:00 PM',
+      service_location: 'Google Meet',
     },
     {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
+      service_img: '../assets/fastingprayer.webp',
+      service_name: 'Fasting Prayer',
+      service_day: "Friday",
       service_time: '10:00 AM',
-      service_location: 'Arumani',
+      service_location: 'Themanoor',
     },
     {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
+      service_img: '../assets/pre_meeting.webp',
+      service_name: 'Preperation Meeting',
+      service_day: "Saturday",
+      service_time: '07:00 PM',
+      service_location: 'Themanoor',
     },
-    {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
-    },
-    {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
-    },
-    {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
-    },
-    {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
-    },
-    {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
-    },
-    {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
-    },
-    {
-      service_img: '../assets/about.jpg',
-      service_name: 'Sunday Service',
-      service_time: '10:00 AM',
-      service_location: 'Arumani',
-    },
+
   ];
 
   const responsive = {
@@ -121,20 +87,22 @@ const WorshipServices = () => {
   return (
     <div className="worship-section">
       <Container className="marquee-container" id="scroll-content">
-        <div className="worship-section-header mb-5 text-center">
-          <h5 className="home-section-title">Worship Services</h5>
-          <h3 className="home-section-desc">
-            Experience the joy of regular worship with our faith community.
-          </h3>
+        <div className=" mb-5 text-center">
+          <SectionHeader title={"Worship Services"} description={" Experience the joy of regular worship with our faith community."} />
         </div>
-
         <Carousel
           responsive={responsive}
           autoPlay={true}
-          removeArrowOnDeviceType={['mobile']}
           infinite={true}
-          customTransition="transform 1500ms ease-in-out "
-          className="pt-5"
+          removeArrowOnDeviceType={['mobile']}
+          customTransition="transform 500ms ease-in-out" // Adjust transition speed
+          transitionDuration={500} // Ensure smooth transition
+          autoPlaySpeed={6000} // Increase speed to prevent early reset
+          pauseOnHover={true}
+          arrows={true}
+          rewind={true} // Prevents abrupt reset
+          rewindWithAnimation={true} // Smooth rewind
+
         >
           {services.map((e, i) => (
             <Col className="px-sm-1  py-2 position-relative" key={i}>

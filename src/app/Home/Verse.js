@@ -19,7 +19,7 @@ const Verse = () => {
         </svg>
       </div>
       <Container className=" verse-container">
-        <div className="verse-section-title">
+        <div className="verse-section-title text-center">
           <h5 className="text-center">Daily Verse</h5>
         </div>
         <div className="verse-section-content col-lg-8 col-md-10 mx-auto">
