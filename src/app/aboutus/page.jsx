@@ -8,7 +8,9 @@ import PageWrapper from "./PageWrapper";
 const AboutPage = () => {
   return (
     <div className="aboutus-page">
-      <SidePageContainer children={<PageWrapper />} />
+      <SidePageContainer>
+        <PageWrapper />
+      </SidePageContainer>
     </div>
   );
 };

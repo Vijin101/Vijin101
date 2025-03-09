@@ -4,7 +4,9 @@ import PageWrapper from "./PageWrapper.jsx";
 const EventsPage = () => {
   return (
     <div className="aboutus-page">
-      <SidePageContainer children={<PageWrapper />} />
+      <SidePageContainer>
+        <PageWrapper />
+      </SidePageContainer>
     </div>
   );
 };
