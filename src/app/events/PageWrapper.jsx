@@ -1,5 +1,5 @@
 import TopBackground from "../../Components/TopBackground/TopBackground";
-import EventsLister from "./EventsLister";
+import EventsLister from "./EventsLister.jsx";
 
 const PageWrapper = () => {
   return (

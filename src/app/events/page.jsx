@@ -1,5 +1,5 @@
 import SidePageContainer from "../../Components/SidePageContainer/SidePageContainer";
-import PageWrapper from "./pageWrapper";
+import PageWrapper from "./pageWrapper.jsx";
 
 const EventsPage = () => {
   return (
