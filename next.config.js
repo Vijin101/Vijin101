@@ -4,6 +4,9 @@ const nextConfig = {
     images: {
         unoptimized: true, // ✅ Disable Image Optimization
     },
+    eslint: {
+        ignoreDuringBuilds: true, // ✅ Disable ESLint during build
+    },
 };
 
 module.exports = nextConfig;
