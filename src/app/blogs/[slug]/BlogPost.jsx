@@ -9,6 +9,7 @@ import {
   Badge,
   Form,
   Image,
+  Spinner,
 } from "react-bootstrap";
 import {
   MdArrowBack,
@@ -35,6 +36,23 @@ const BlogPost = ({ slug }) => {
   const [readCount, setReadCount] = useState(0);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading comments and read count
+    const loadData = async () => {
+      try {
+        setComments(fetchedComments);
+        setReadCount(156); // Example read count
+      } catch (error) {
+        console.error("Error loading blog data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
 
   // Simulate fetching comments from an API
   const fetchedComments = [
@@ -54,12 +72,6 @@ const BlogPost = ({ slug }) => {
     },
   ];
 
-  useEffect(() => {
-    // Simulate loading comments and read count
-    setComments(fetchedComments);
-    setReadCount(156); // Example read count
-  }, []);
-
   const handleAddComment = (e) => {
     e.preventDefault();
     if (!newComment.trim()) return;
@@ -78,6 +90,16 @@ const BlogPost = ({ slug }) => {
 
   const blog = blogs.find((blog) => blog.blog_id === slug);
 
+  if (isLoading) {
+    return (
+      <Container className="my-5 text-center">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
+
   // Add check for blog existence
   if (!blog) {
     return (
@@ -93,11 +115,12 @@ const BlogPost = ({ slug }) => {
     );
   }
 
-  const relatedPosts = blogs.filter(
-    (post) =>
-      post.blog_tags.some((tag) => blog.blog_tags.includes(tag)) &&
-      post.blog_id !== slug
-  );
+  const relatedPosts =
+    blogs.filter(
+      (post) =>
+        post.blog_tags?.some((tag) => blog.blog_tags?.includes(tag)) &&
+        post.blog_id !== slug
+    ) || [];
 
   const handleRelatedPostClick = (blog_id) => {
     router.push(`/blogs/${blog_id}`);
