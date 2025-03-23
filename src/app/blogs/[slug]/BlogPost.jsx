@@ -78,6 +78,21 @@ const BlogPost = ({ slug }) => {
 
   const blog = blogs.find((blog) => blog.blog_id === slug);
 
+  // Add check for blog existence
+  if (!blog) {
+    return (
+      <Container className="my-5">
+        <div className="text-center">
+          <h2>Blog post not found</h2>
+          <p>The requested blog post could not be found.</p>
+          <Button variant="primary" onClick={() => router.push("/blogs")}>
+            Return to Blogs
+          </Button>
+        </div>
+      </Container>
+    );
+  }
+
   const relatedPosts = blogs.filter(
     (post) =>
       post.blog_tags.some((tag) => blog.blog_tags.includes(tag)) &&
