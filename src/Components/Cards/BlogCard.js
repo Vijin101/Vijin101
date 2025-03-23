@@ -13,10 +13,7 @@ const BlogCard = ({ blog }) => {
 
   const handleReadMore = () => {
     // Convert blog title to URL-friendly slug
-    const slug = blog.blog_title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '');
+    const slug = blog.blog_id
     router.push(`/blogs/${slug}`);
   };
 

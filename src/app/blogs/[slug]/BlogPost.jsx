@@ -26,6 +26,7 @@ import {
 import { useState, useEffect } from "react";
 import styles from "./BlogPost.module.css";
 import CommentSection from "../../../Components/Comments/CommentSection";
+import { blogs } from "../data";
 
 const BlogPost = ({ slug }) => {
   const router = useRouter();
@@ -75,67 +76,16 @@ const BlogPost = ({ slug }) => {
     setNewComment("");
   };
 
-  // This would typically come from an API or database
-  const blog = {
-    blog_title: "Walking by Faith: Trusting God in Uncertain Times",
-    blog_cover: "../assets/blog1.jpg",
-    blog_desc: `Life is full of uncertainties, but God's promises remain steadfast. Discover how to cultivate unwavering faith, find peace in the midst of challenges, and trust in God's perfect plan for your life.`,
-    blog_author: "Author Name",
-    blog_category: "Faith",
-    blog_published: "20-10-2030",
-    blog_tags: ["Faith", "Trust", "Prayer", "Christian Living"],
-    blog_content: `
-      <p>In a world filled with uncertainty and challenges, walking by faith becomes more than just a phrase—it becomes a way of life. As believers, we are called to trust in God's promises even when the path ahead seems unclear.</p>
+  const blog = blogs.find((blog) => blog.blog_id === slug);
 
-      <h2>The Foundation of Faith</h2>
-      <p>Faith is not the absence of doubt, but rather the presence of trust in something greater than ourselves. The Bible tells us that "faith is the substance of things hoped for, the evidence of things not seen" (Hebrews 11:1). This powerful truth reminds us that our faith is built on the solid foundation of God's character and promises.</p>
+  const relatedPosts = blogs.filter(
+    (post) =>
+      post.blog_tags.some((tag) => blog.blog_tags.includes(tag)) &&
+      post.blog_id !== slug
+  );
 
-      <h2>Finding Peace in Challenges</h2>
-      <p>When we face difficult circumstances, it's natural to feel anxious and uncertain. However, Scripture reminds us to "be anxious for nothing, but in everything by prayer and supplication, with thanksgiving, let your requests be made known to God" (Philippians 4:6). Through prayer and meditation on God's Word, we can find peace that surpasses all understanding.</p>
-
-      <h2>Trusting in God's Plan</h2>
-      <p>One of the most challenging aspects of walking by faith is surrendering our own plans and trusting in God's perfect timing. The prophet Jeremiah reminds us that God has plans to prosper us and not to harm us, plans to give us hope and a future (Jeremiah 29:11).</p>
-
-      <h2>Practical Steps for Walking by Faith</h2>
-      <ul>
-        <li>Daily prayer and meditation on Scripture</li>
-        <li>Surrounding yourself with fellow believers</li>
-        <li>Keeping a gratitude journal</li>
-        <li>Sharing your faith journey with others</li>
-      </ul>
-
-      <p>Remember, walking by faith is a journey, not a destination. Each day presents new opportunities to trust in God's promises and experience His faithfulness in our lives.</p>
-    `,
-  };
-
-  // Related posts data (would typically come from API)
-  const relatedPosts = [
-    {
-      title: "The Power of Prayer",
-      cover: "../assets/blog2.jpg",
-      category: "Prayer",
-      readTime: "5 min read",
-    },
-    {
-      title: "Living a Christ-Centered Life",
-      cover: "../assets/blog3.jpg",
-      category: "Christian Living",
-      readTime: "7 min read",
-    },
-    {
-      title: "Serving Others",
-      cover: "../assets/blog4.jpg",
-      category: "Service",
-      readTime: "6 min read",
-    },
-  ];
-
-  const handleRelatedPostClick = (title) => {
-    const slug = title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
-    router.push(`/blogs/${slug}`);
+  const handleRelatedPostClick = (blog_id) => {
+    router.push(`/blogs/${blog_id}`);
   };
 
   return (
@@ -211,15 +161,17 @@ const BlogPost = ({ slug }) => {
                 <Col key={index} md={4}>
                   <div
                     className={styles.relatedPost}
-                    onClick={() => handleRelatedPostClick(post.title)}
+                    onClick={() => handleRelatedPostClick(post.blog_id)}
                   >
-                    <img src={post.cover} alt={post.title} />
+                    <img src={post.blog_cover} alt={post.blog_title} />
                     <div className={styles.relatedPostContent}>
                       <Badge bg="secondary" className={styles.categoryBadge}>
-                        {post.category}
+                        {post.blog_category}
                       </Badge>
-                      <h4>{post.title}</h4>
-                      <span className={styles.readTime}>{post.readTime}</span>
+                      <h4>{post.blog_title}</h4>
+                      <span className={styles.readTime}>
+                        {post.blog_published}
+                      </span>
                     </div>
                   </div>
                 </Col>
