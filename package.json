@@ -15,6 +15,7 @@
     "dayjs": "^1.11.10",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "formik": "^2.4.6",
     "framer-motion": "^10.16.4",
     "next": "13.4.19",
     "postcss": "8.4.29",
@@ -23,6 +24,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
     "react-multi-carousel": "^2.8.4",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "3.3.3",
+    "yup": "^1.6.1"
   }
 }

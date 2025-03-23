@@ -5,9 +5,21 @@ import {
   MdOutlineCalendarMonth,
   MdOutlineComment,
 } from 'react-icons/md';
+import { useRouter } from 'next/navigation';
 import './Card.css';
 
 const BlogCard = ({ blog }) => {
+  const router = useRouter();
+
+  const handleReadMore = () => {
+    // Convert blog title to URL-friendly slug
+    const slug = blog.blog_title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+    router.push(`/blogs/${slug}`);
+  };
+
   return (
     <Card className="h-100 blog-card">
       <Card.Img
@@ -21,7 +33,7 @@ const BlogCard = ({ blog }) => {
         <div className="d-flex align-items-center justify-content-between blog-card-subcontent">
           <div className="">
             <MdOutlineCalendarMonth style={{ verticalAlign: '-2px' }} />{' '}
-            <span>01-01-2022</span>
+            <span>{blog.blog_published}</span>
           </div>
           <div className="">
             <MdOutlineComment style={{ verticalAlign: '-3px' }} />{' '}
@@ -43,13 +55,17 @@ const BlogCard = ({ blog }) => {
           <Image
             src="../assets/user.jpg"
             roundedCircle
-            className=" blog-card-avatar"
+            className="blog-card-avatar"
             alt="user-image"
           />
-          <span className="ms-2 blog-card-username">Author Name</span>
+          <span className="ms-2 blog-card-username">{blog.blog_author}</span>
         </div>
 
-        <Button size="sm" className="blog-card-btn accent-btn">
+        <Button
+          size="sm"
+          className="blog-card-btn accent-btn"
+          onClick={handleReadMore}
+        >
           Read <MdArrowForward style={{ verticalAlign: '-3px' }} />
         </Button>
       </Card.Footer>

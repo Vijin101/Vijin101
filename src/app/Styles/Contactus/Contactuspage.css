@@ -1,0 +1,131 @@
+.contactus-page {
+  background-color: var(--bg-main);
+}
+
+.contact-info-section {
+  margin-top: 3rem;
+}
+
+.contact-info-box {
+  background: var(--bg-light);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  text-align: center;
+}
+
+.contact-info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-info-link {
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.contact-info-box svg {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.contact-info-box h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.contact-info-box p {
+  font-size: 1rem;
+  margin-bottom: 0;
+  color: var(--text-dark);
+}
+
+.contact-form {
+  background: var(--bg-light);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+  border: 1px solid var(--accent-color);
+  padding: 0.8rem;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(26, 46, 80, 0.25);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.map-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.social-icon {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  color: var(--secondary-color);
+  transform: translateY(-3px);
+}
+
+.social-icon svg {
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-info-box {
+    padding: 1.5rem;
+  }
+
+  .contact-info-box svg {
+    font-size: 2rem;
+  }
+
+  .contact-form {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-info-box {
+    padding: 1rem;
+  }
+
+  .contact-info-box svg {
+    font-size: 1.8rem;
+  }
+
+  .contact-form {
+    padding: 1rem;
+  }
+
+  .form-control {
+    padding: 0.6rem;
+  }
+}

@@ -2,3 +2,51 @@
   padding: 100px 0;
   background-color: var(--bg-hover-light);
 }
+
+.read-more-btn {
+  padding: 12px 30px !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  transition: all 0.3s ease !important;
+  min-width: 180px !important;
+  border-radius: 4px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+  color: var(--primary-dark) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.read-more-btn:hover {
+  transform: translateX(5px) !important;
+  background-color: var(--secondary-hover) !important;
+  border-color: var(--secondary-hover) !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.read-more-btn svg {
+  font-size: 1.1rem !important;
+  transition: transform 0.3s ease !important;
+  margin-top: -1px !important;
+}
+
+.read-more-btn:hover svg {
+  transform: translateX(3px) !important;
+}
+
+@media (max-width: 768px) {
+  .sermons-section {
+    padding: 60px 0;
+  }
+
+  .read-more-btn {
+    padding: 10px 25px !important;
+    font-size: 0.9rem !important;
+    min-width: 160px !important;
+  }
+}

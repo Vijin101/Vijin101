@@ -1,18 +1,104 @@
-.aboutus-page{
-    
-    
+.aboutus-page {
+  background-color: var(--bg-main);
 }
 
-.aboutpage-content{
-    text-align: center;
-    background-color: var(--accent-color);
-    padding: 20px 5px;
+.mission-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Ensures responsiveness */
 }
 
-.aboutpage-content-title{
-    text-align: center;
+.vision-box,
+.mission-box {
+  /* background: var(--bg-light); */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: var(--font-text);
+  color: var(--text-dark);
+  text-align: center;
+  flex: 1;
+  min-height: 150px; /* Ensures all boxes have the same height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.aboute-images-row{
-    padding: 20px 0;
+.vision-box:hover,
+.mission-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  background: var(--bg-hover-light);
+}
+
+.vision-box svg,
+.mission-box svg {
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+hr {
+  border: 0;
+  height: 2px;
+  background: var(--accent-color);
+  /* width: 60%; */
+  margin: 20px auto;
+}
+
+.history-section {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+}
+
+.history-left {
+  background-color: #2d2d2d; /* Dark background */
+  color: white;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.history-left h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.history-right {
+  flex: 2;
+  color: #2d2d2d;
+  padding: 40px;
+  text-align: left;
+}
+
+.history-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1a2b55; /* Theme color */
+  margin-bottom: 15px;
+}
+
+.history-right p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.message-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.message-right img {
+  object-fit: cover;
+  width: 90%;
 }

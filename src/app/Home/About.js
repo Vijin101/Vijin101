@@ -25,7 +25,7 @@ const About = () => {
           <Col lg={7} className="order-lg-2 order-1">
             <Paragraph content={`At Christian Evangelical Assembly Church, we are dedicated to spreading the love and teachings of Jesus Christ. Our mission is to create a welcoming space where individuals and families can grow spiritually, find hope, and build meaningful connections.
               We believe in the power of faith, prayer, and service. Through our worship gatherings, outreach programs, and community initiatives, we aim to make a positive impact in the lives of our members and beyond. Whether you are new to faith or looking for a place to belong, we invite you to join us on this journey of love, grace, and transformation.`} />
-            <Link href="/" className="link-a">
+            <Link href="/aboutus" className="link-a">
               Read more
             </Link>
           </Col>

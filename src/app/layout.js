@@ -6,6 +6,8 @@ import Footer from "../Components/Footer/Footer";
 import CustomCursor from "../Components/CustomeCursor/CustomCursor";
 import LayoutContextProvider from "../context/LayoutContext";
 import LoadingLineReveal from "../Components/Loading/LoadingLineReveal";
+import FloatingContactButtons from "../Components/Buttons/FloatingContactButtons";
+import PageScrollUpButton from '../Components/Buttons/ScrollUp/PageScrollUpButton';
 
 const raleway = Roboto({
   subsets: ["latin"],
@@ -33,7 +35,10 @@ export default function RootLayout({ children }) {
             <Header />
             <CustomCursor />
             {children}
+            <FloatingContactButtons />
+            <PageScrollUpButton />
             <Footer />
+
           </LoadingLineReveal>
         </LayoutContextProvider>
       </body>

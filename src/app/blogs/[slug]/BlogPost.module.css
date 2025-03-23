@@ -1,0 +1,453 @@
+.backButton {
+  color: var(--primary-color);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-family: var(--font-text);
+}
+
+.backButton:hover {
+  color: var(--primary-hover);
+  transform: translateX(-5px);
+}
+
+.blogContent {
+  background: var(--bg-light);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--accent-light);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .blogContent {
+    padding: 20px 15px;
+    border-radius: 0;
+  }
+
+  .blogHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .blogMeta {
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .metaItem {
+    font-size: 0.85rem;
+    padding: 4px 10px;
+  }
+
+  .blogActions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .actionButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .blogImage {
+    height: 300px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  .blogText h2 {
+    font-size: 1.4rem;
+    margin: 25px 0 15px;
+    padding-bottom: 10px;
+  }
+
+  .blogText h2::after {
+    width: 40px;
+  }
+
+  .blogText p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .blogTags {
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .tag {
+    padding: 6px 15px;
+    font-size: 0.8rem;
+  }
+}
+
+.blogContent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--secondary-color),
+    var(--secondary-light)
+  );
+}
+
+.blogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--accent-light);
+}
+
+.blogMeta {
+  display: flex;
+  gap: 25px;
+  color: var(--neutral-dark);
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+  font-family: var(--font-text);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--bg-hover-light);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.metaItem:hover {
+  background: var(--secondary-color);
+  color: var(--primary-dark);
+}
+
+.metaItem svg {
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+}
+
+.blogActions {
+  display: flex;
+  gap: 12px;
+}
+
+.actionButton {
+  color: var(--accent-dark) !important;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background: var(--bg-hover-light) !important;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButton:hover {
+  color: var(--secondary-color) !important;
+  background-color: var(--secondary-color) !important;
+  color: var(--primary-dark) !important;
+  transform: translateY(-2px);
+}
+
+.blogImage {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--accent-light);
+  transition: all 0.3s ease;
+}
+
+.blogImage:hover {
+  transform: scale(1.02);
+}
+
+.blogTags {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.tag {
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background-color: var(--secondary-color) !important;
+  color: var(--primary-dark) !important;
+  border: none !important;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: var(--secondary-hover) !important;
+}
+
+.blogText {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+  font-family: var(--font-text);
+}
+
+.blogText h2 {
+  color: var(--primary-color);
+  margin: 35px 0 20px;
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.blogText h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: var(--secondary-color);
+  border-radius: 2px;
+}
+
+.blogText p {
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+}
+
+.blogText ul {
+  margin: 25px 0 !important;
+  padding-left: 0 !important;
+  list-style: none;
+}
+
+.blogText li {
+  margin-bottom: 15px !important;
+  position: relative;
+  padding-left: 28px !important;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+}
+
+.blogText li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+}
+
+.blogContent hr {
+  border: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--secondary-color),
+    var(--secondary-light)
+  );
+  margin: 40px auto;
+  opacity: 0.8;
+  width: 100%;
+}
+
+.relatedPosts {
+  margin-top: 50px;
+}
+
+.relatedPosts h3 {
+  color: var(--primary-color);
+  margin-bottom: 30px;
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.relatedPost {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-light);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--accent-light);
+}
+
+.relatedPost:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-color: var(--secondary-color);
+}
+
+.relatedPost img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.relatedPostContent {
+  padding: 20px;
+}
+
+.categoryBadge {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  background-color: var(--accent-color) !important;
+  color: var(--bg-light) !important;
+  border: none !important;
+}
+
+.relatedPost h4 {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  font-family: var(--font-title);
+}
+
+.readTime {
+  color: var(--neutral-dark);
+  font-size: 0.9rem;
+  font-family: var(--font-text);
+}
+
+.commentsSection {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid var(--accent-light);
+}
+
+.commentsSection h3 {
+  color: var(--primary-color);
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.commentForm {
+  margin-bottom: 40px;
+}
+
+.commentInput {
+  background: var(--bg-main) !important;
+  border: 1px solid var(--accent-light) !important;
+  border-radius: 12px !important;
+  padding: 15px !important;
+  font-family: var(--font-text);
+  margin-bottom: 15px;
+  resize: none;
+}
+
+.commentInput:focus {
+  box-shadow: 0 0 0 2px var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+.commentButton {
+  background: var(--secondary-color) !important;
+  border: none !important;
+  color: var(--primary-dark) !important;
+  padding: 8px 20px !important;
+  border-radius: 8px !important;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.commentButton:hover {
+  background: var(--secondary-hover) !important;
+  transform: translateY(-2px);
+}
+
+.commentButton svg {
+  font-size: 1.2rem;
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.commentItem {
+  background: var(--bg-main);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--accent-light);
+}
+
+.commentHeader {
+  margin-bottom: 15px;
+}
+
+.commentAuthor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.commentAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--secondary-color);
+}
+
+.commentAuthor h5 {
+  margin: 0;
+  color: var(--primary-color);
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.commentAuthor small {
+  color: var(--neutral-dark);
+  font-size: 0.85rem;
+}
+
+.commentContent {
+  color: var(--text-dark);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}

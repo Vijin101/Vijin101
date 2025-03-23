@@ -1,0 +1,98 @@
+.family-registration-page {
+  background-color: var(--bg-main);
+}
+
+.registration-intro {
+  background: var(--bg-light);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.intro-icon {
+  color: var(--primary-color);
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.registration-intro h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.info-box {
+  background: var(--bg-light);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.info-icon {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.info-box h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.info-box ul {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.info-box li {
+  margin-bottom: 10px;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+}
+
+.form-container {
+  background: var(--bg-light);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.contact-info {
+  background: var(--bg-light);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.contact-info a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: var(--secondary-dark);
+}
+
+@media (max-width: 768px) {
+  .registration-intro {
+    padding: 20px;
+  }
+
+  .form-container {
+    padding: 15px;
+  }
+
+  .info-box {
+    margin-bottom: 20px;
+  }
+}

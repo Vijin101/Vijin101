@@ -153,6 +153,7 @@ li {
 }
 
 p {
-  color: var(--neutral-color);
-  font-size: clamp(14px, 4vw, 16px);
+  color: var(--text-dark);
+  font-size: 18px;
+  line-height: 1.6;
 }

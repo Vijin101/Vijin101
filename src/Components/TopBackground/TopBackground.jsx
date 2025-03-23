@@ -1,16 +1,14 @@
 import "./TopBackground.css";
 
-const TopBackground = () => {
+const TopBackground = ({ title = "Title", desc }) => {
   return (
     <section
       className="top-background"
-      style={{ backgroundImage: `url(/assets/versebg.jpg)` }}
+      style={{ backgroundImage: `url(/assets/banner.webp)` }}
     >
       <div className="container top-background-content">
-        <h2>TITLE HERE</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad adipisci.
-        </p>
+        <h2>{title}</h2>
+        {desc && <p>{desc}</p>}
       </div>
     </section>
   );

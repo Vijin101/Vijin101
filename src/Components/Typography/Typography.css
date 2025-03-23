@@ -27,3 +27,13 @@
   max-width: 600px;
   line-height: 1.6;
 }
+
+.subtitle-class {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-top: 10px;
+  letter-spacing: 0.4px;
+}

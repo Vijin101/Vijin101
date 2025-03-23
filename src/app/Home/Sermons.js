@@ -1,10 +1,11 @@
 'use client';
 import '../Styles/Home/Sermons.css';
 import { useEffect, useState } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import dayjs from 'dayjs';
 import SermonCard from '../../Components/Cards/SermonCard';
 import SectionHeader from '../../Components/Typography/SectionHeader';
+import { MdArrowForward } from 'react-icons/md';
 
 const Sermons = () => {
   const apiKey = 'AIzaSyBfS_nwusCkC2hlmvVsajvHwAUpUdL97Io';
@@ -48,6 +49,17 @@ const Sermons = () => {
               </Col>
             ))}
           </Row>
+        </div>
+        <div className="text-center mt-5">
+          <Button
+            href="https://www.youtube.com/@ceachurchattoor"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="read-more-btn accent-btn"
+            size="lg"
+          >
+            Watch More Sermons <MdArrowForward style={{ verticalAlign: '-2px', marginLeft: '2px' }} />
+          </Button>
         </div>
       </Container>
     </div>

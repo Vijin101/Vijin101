@@ -12,7 +12,7 @@ const LaptopMenu = ({ menus }) => {
   return (
     <ul className="d-flex align-items-center nav-menu-list">
       {menus.map((e, i) => (
-        <li key={i} className="px-3">
+        <li key={i} className="px-2">
           <Link
             className={`nav-menu-item ${activeRoute(e.path) ? 'active' : ''}`}
             href={e.path}

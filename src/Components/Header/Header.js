@@ -37,8 +37,10 @@ const Header = () => {
   }, []);
   const menus = [
     { name: "HOME", path: "/" },
-    { name: "EVENTS", path: "/events" },
     { name: "ABOUT US", path: "/aboutus" },
+    { name: "MINISTRY", path: "/ministry" },
+    { name: "FAMILY REGISTERATION", path: "/family-registration" },
+    { name: "GALLERY", path: "/gallery" },
     { name: "CONTACT", path: "/contactus" },
   ];
   return (
@@ -54,13 +56,13 @@ const Header = () => {
               </div>
             </Link>
           </div>
-          <div className="d-none d-md-block">
+          <div className="d-none d-xl-block">
             <LaptopMenu menus={menus} />
           </div>
-          <div className="d-block d-md-none">
+          <div className="d-block d-xl-none">
             <MobileMenu menus={menus} />
           </div>
-          <div className="d-none d-md-block">
+          <div className="d-none d-xl-block">
             <Button className="accent-btn">
               <RiLoginCircleLine className="me-1" />
               LOGIN
