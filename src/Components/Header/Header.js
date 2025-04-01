@@ -8,10 +8,12 @@ import { Button, Container, Row } from "react-bootstrap";
 import MobileMenu from "./MobileMenu";
 import { useEffect, useState } from "react";
 import { useLayout } from "../../context/LayoutContext";
+import { useRouter } from "next/navigation";
 // import { usePathname } from "next/navigation";
 
 const Header = () => {
   const { scrolled, setScrolled } = useLayout();
+  const router = useRouter();
 
   // const pathName = usePathname();
 
@@ -63,7 +65,7 @@ const Header = () => {
             <MobileMenu menus={menus} />
           </div>
           <div className="d-none d-xl-block">
-            <Button className="accent-btn">
+            <Button className="accent-btn" onClick={() => router.push("/auth/login")}>
               <RiLoginCircleLine className="me-1" />
               LOGIN
             </Button>

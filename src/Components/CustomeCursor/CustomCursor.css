@@ -1,23 +1,62 @@
 .custom-cursor {
-  width: 24px; /* Adjust the cursor width */
-  height: 24px; /* Adjust the cursor height */
-  /* background-image: url('path-to-your-cursor-image.png'); Replace with your cursor image path */
-  background-size: cover;
-  position: absolute;
-  pointer-events: none; /* Ensures the cursor doesn't interfere with underlying elements */
-  z-index: 9999; /* Ensures the cursor is above other elements */
+  width: 24px;
+  height: 24px;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
   background-color: transparent;
   border-radius: 50%;
-  border: 1px solid var(--secondary-color);
+  border: 2px solid var(--secondary-color);
+  transition: width 0.2s ease, height 0.2s ease;
+  transform-origin: center;
 }
 
-a:-webkit-any-link + .custom-cursor {
-  width: 76px !important; /* Larger cursor width on hover */
-  height: 76px !important; /* Larger cursor height on hover */
+.custom-cursor.highlight {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--secondary-color);
+}
+
+/* Magnetic effect for interactive elements */
+a,
+button,
+input,
+select,
+textarea,
+[role="button"] {
+  cursor: none;
+}
+
+a:hover ~ .custom-cursor,
+button:hover ~ .custom-cursor,
+input:hover ~ .custom-cursor,
+select:hover ~ .custom-cursor,
+textarea:hover ~ .custom-cursor,
+[role="button"]:hover ~ .custom-cursor {
+  width: 40px !important;
+  height: 40px !important;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--secondary-color);
+}
+
+/* Magnetic effect for text elements */
+p:hover ~ .custom-cursor,
+h1:hover ~ .custom-cursor,
+h2:hover ~ .custom-cursor,
+h3:hover ~ .custom-cursor,
+h4:hover ~ .custom-cursor,
+h5:hover ~ .custom-cursor,
+h6:hover ~ .custom-cursor,
+span:hover ~ .custom-cursor {
+  width: 60px !important;
+  height: 60px !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--secondary-color);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 @media (hover: none) {
-  /* Remove cursor animation on touch devices */
   .custom-cursor {
     display: none;
   }

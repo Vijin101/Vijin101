@@ -1,0 +1,218 @@
+.settings-management {
+  padding: 2rem;
+  background-color: var(--bg-main);
+  min-height: 100vh;
+}
+
+.header-section {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--primary-dark) 100%
+  );
+  margin: -2rem -2rem 2rem -2rem;
+  padding: 2rem;
+  color: var(--bg-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  color: var(--bg-light);
+  font-family: var(--font-title);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.header-description {
+  color: var(--bg-light);
+  opacity: 0.9;
+  font-size: 0.95rem;
+  max-width: 600px;
+}
+
+.settings-card {
+  background-color: var(--bg-light);
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.settings-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.settings-card-title {
+  color: var(--primary-color);
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.settings-card-title svg {
+  color: var(--secondary-color);
+  font-size: 1.5rem;
+}
+
+.settings-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.settings-form-group:last-child {
+  margin-bottom: 0;
+}
+
+.settings-label {
+  color: var(--text-dark);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.settings-description {
+  color: var(--accent-color);
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.settings-input {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--neutral-light);
+  border-radius: 8px;
+  font-family: var(--font-text);
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  transition: all 0.3s ease;
+}
+
+.settings-input:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 4px rgba(227, 181, 5, 0.1);
+}
+
+.settings-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--neutral-light);
+  border-radius: 8px;
+  font-family: var(--font-text);
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  transition: all 0.3s ease;
+}
+
+.settings-select:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 4px rgba(227, 181, 5, 0.1);
+}
+
+.settings-switch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.settings-switch .form-check-input {
+  width: 3rem;
+  height: 1.5rem;
+  background-color: var(--neutral-light);
+  border: none;
+  cursor: pointer;
+}
+
+.settings-switch .form-check-input:checked {
+  background-color: var(--success-color);
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--neutral-light);
+}
+
+.settings-btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.settings-btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--bg-light);
+}
+
+.settings-btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.settings-btn-secondary {
+  background-color: transparent;
+  border-color: var(--neutral-light);
+  color: var(--text-dark);
+}
+
+.settings-btn-secondary:hover {
+  background-color: var(--bg-hover-light);
+  border-color: var(--neutral-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .settings-management {
+    padding: 1rem;
+  }
+
+  .header-section {
+    margin: -1rem -1rem 1.5rem -1rem;
+    padding: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .settings-card {
+    padding: 1rem;
+  }
+
+  .settings-actions {
+    flex-direction: column;
+  }
+
+  .settings-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.settings-card {
+  animation: fadeIn 0.3s ease-out forwards;
+}

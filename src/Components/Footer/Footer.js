@@ -22,7 +22,7 @@ const Footer = () => {
             </Link>
           </Col>
         </Row>
-        <Row className="gx-5 footer-main-content">
+        <Row className="footer-main-content">
           {/* Logo and About Column */}
           <Col lg={4} md={6} className="footer-about-col mb-4 mb-lg-0">
 

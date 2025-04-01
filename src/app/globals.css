@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* Your custom global styles */
+body {
+  font-family: "Roboto", sans-serif;
+}
 
 :root {
   /* Font Families */
@@ -102,8 +108,8 @@ a,
 ul,
 li {
   list-style: none;
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 0;
+  margin: 0;
 }
 
 .card,
