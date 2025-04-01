@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useMemo, useState } from "react";
-import CustomSnackbar from "../components/Notification/CustomSnackbar";
+import CustomSnackbar from "../Components/Notification/CustomSnackbar";
 
 export const LayoutContext = createContext();
 
