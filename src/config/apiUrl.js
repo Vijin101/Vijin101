@@ -1,7 +1,7 @@
 
 // src/services/apiConfig.js
-// export const API_BASE_URL = "https://church-server-two.vercel.app/api"; // Replace with your API base URL
-export const API_BASE_URL = " http://localhost:8000/api"; // Replace with your API base URL
+export const API_BASE_URL = "https://church-server-two.vercel.app/api"; // Replace with your API base URL
+// export const API_BASE_URL = " http://localhost:8000/api"; // Replace with your API base URL
 
 export const DEFAULT_HEADERS = {
     "Content-Type": "application/json",
