@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { FaBars } from 'react-icons/fa';
 import Loading from '../../Components/Loading/Loading';
 import DashboardNav from '../../Components/Dashboard/DashboardNav';
 import './dashboard.css';
@@ -12,47 +13,36 @@ export default function DashboardLayout({ children }) {
     const router = useRouter();
     const pathname = usePathname();
     const [isLoading, setIsLoading] = useState(true);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(
+        typeof window !== 'undefined' && window.innerWidth > 768
+    );
     const { isAuthenticated, user, isLoading: authLoading } = useAuthStore();
     const { initializeRoleList } = useRoleStore();
+
     useEffect(() => {
-        // Check authentication status
-        const checkAuth = async () => {
-            try {
-                // Replace this with your actual authentication check
-                if (!isAuthenticated) {
-                    router.push('/auth/login');
-                    return;
-                }
-                // Check if user is trying to access admin routes without admin privileges
-                if (pathname.startsWith('/dashboard/admin') && user.role_name !== 'Admin' && user.role_name !== 'Super Admin') {
 
-                    router.push('/dashboard/user');
-                    return;
-                }
-
-                // Check if user is trying to access user routes with admin privileges
-                if (pathname.startsWith('/dashboard/user') && (user.role_name === 'Admin' || user.role_name === 'Super Admin')) {
-                    router.push('/dashboard/admin');
-                    return;
-                }
-            } catch (error) {
-                console.error('Authentication error:', error);
-                router.push('/auth/login');
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
+        console.log(isAuthenticated);
         if (!authLoading) {
-            if (user.role_name === 'Admin' || user.role_name === 'Super Admin') {
+            if (!isAuthenticated) {
+                router.push('/auth/login');
+                return;
+            }
+
+            if (user?.role_name === 'Admin' || user?.role_name === 'Super Admin') {
                 initializeRoleList();
             }
-            checkAuth();
 
+            const adminRoutes = pathname.startsWith('/dashboard/admin');
+            const userRoutes = pathname.startsWith('/dashboard/user');
+
+            if (adminRoutes && user.role_name !== 'Admin' && user.role_name !== 'Super Admin') {
+                router.push('/dashboard/user');
+            } else if (userRoutes && (user.role_name === 'Admin' || user.role_name === 'Super Admin')) {
+                router.push('/dashboard/admin');
+            }
         }
+    }, [isAuthenticated, user?.role_name, authLoading]);
 
-    }, [router, pathname, isAuthenticated, user, authLoading]);
 
     if (authLoading) {
         return <Loading />;
@@ -68,9 +58,17 @@ export default function DashboardLayout({ children }) {
             <main className={`dashboard-main ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
                 <div className="dashboard-header">
                     <div className="dashboard-header-content">
-                        <h1 className="dashboard-title">
-                            {pathname.includes('/admin') ? 'Admin Dashboard' : 'User Dashboard'}
-                        </h1>
+                        <div className="d-flex align-items-center">
+                            <button
+                                className="mobile-sidebar-toggle"
+                                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                            >
+                                <FaBars />
+                            </button>
+                            <h1 className="dashboard-title">
+                                {pathname.includes('/admin') ? 'Admin Dashboard' : 'User Dashboard'}
+                            </h1>
+                        </div>
                         <div className="dashboard-user-info">
                             <div className="user-avatar" onClick={() => router.push('/dashboard/admin/profile')}>
                                 {user?.fullName ? user.fullName.charAt(0) : '?'}
@@ -88,4 +86,4 @@ export default function DashboardLayout({ children }) {
             </main>
         </div>
     );
-} 
+}

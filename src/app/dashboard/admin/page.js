@@ -2,26 +2,43 @@
 
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { FaUsers, FaRegCalendarAlt, FaPrayingHands, FaBell, FaChartLine, FaUserPlus, FaCog, FaFileAlt, FaArrowRight } from 'react-icons/fa';
-import TextInput from '../../../Components/InputFields/TextInput';
-import EmailInput from '../../../Components/InputFields/EmailInput';
-import AutocompleteInput from '../../../Components/InputFields/AutocompleteInput';
-import CheckboxInput from '../../../Components/InputFields/CheckboxInput';
-import ColorPicker from '../../../Components/InputFields/ColorPicker';
-import DateInput from '../../../Components/InputFields/DateInput';
-import FileInput from '../../../Components/InputFields/FileInput';
-import MultiSelectDropdown from '../../../Components/InputFields/MultiSelectDropdown';
-import NumberInput from '../../../Components/InputFields/NumberInput';
-import PasswordInput from '../../../Components/InputFields/PasswordInput';
-import RadioInput from '../../../Components/InputFields/RadioInput';
-import RangeSlider from '../../../Components/InputFields/RangeSlider';
-import SelectInput from '../../../Components/InputFields/SelectInput';
-import TextareaInput from '../../../Components/InputFields/TextareaInput';
-import TimeInput from '../../../Components/InputFields/TimeInput';
-import ToggleSwitch from '../../../Components/InputFields/ToggleSwitch';
-import CustomAutocompleteInput from '../../../Components/InputFields/CustomAutocompleteInput';
-
+// import TextInput from '../../../Components/InputFields/TextInput';
+// import EmailInput from '../../../Components/InputFields/EmailInput';
+// import AutocompleteInput from '../../../Components/InputFields/AutocompleteInput';
+// import CheckboxInput from '../../../Components/InputFields/CheckboxInput';
+// import ColorPicker from '../../../Components/InputFields/ColorPicker';
+// import DateInput from '../../../Components/InputFields/DateInput';
+// import FileInput from '../../../Components/InputFields/FileInput';
+// import MultiSelectDropdown from '../../../Components/InputFields/MultiSelectDropdown';
+// import NumberInput from '../../../Components/InputFields/NumberInput';
+// import PasswordInput from '../../../Components/InputFields/PasswordInput';
+// import RadioInput from '../../../Components/InputFields/RadioInput';
+// import RangeSlider from '../../../Components/InputFields/RangeSlider';
+// import SelectInput from '../../../Components/InputFields/SelectInput';
+// import TextareaInput from '../../../Components/InputFields/TextareaInput';
+// import TimeInput from '../../../Components/InputFields/TimeInput';
+// import ToggleSwitch from '../../../Components/InputFields/ToggleSwitch';
+// import CustomAutocompleteInput from '../../../Components/InputFields/CustomAutocompleteInput';
+import MultiSelectAutocompleteCheckbox from '../../../Components/InputFields/MultiSelectAutocompleteCheckbox';
+import { useState } from 'react';
 
 export default function AdminDashboard() {
+    const [selectedFilms, setSelectedFilms] = useState([]);
+
+    const handleFilmChange = (newFilms) => {
+        setSelectedFilms(newFilms);
+    };
+
+    const topFilms = [
+        { label: 'The Shawshank Redemption', value: 1994 },
+        { label: 'The Godfather', value: 1972 },
+        { label: 'The Godfather: Part II', value: 1974 },
+        { label: 'The Dark Knight', value: 2008 },
+        { label: '12 Angry Men', value: 1957 },
+        { label: "Schindler's List", value: 1993 },
+        { label: 'Pulp Fiction', value: 1994 },
+    ];
+
 
 
     const stats = [
@@ -208,7 +225,7 @@ export default function AdminDashboard() {
 
             {/* check all inputs */}
 
-            <TextInput label="Name" placeholder="Enter your name" value="" size="small" className="mb-4" iconLeft={<FaUserPlus />} />
+            {/* <TextInput label="Name" placeholder="Enter your name" value="" size="small" className="mb-4" iconLeft={<FaUserPlus />} />
             <TextInput label="Name" placeholder="Enter your name" value="" size="small" className="mb-4" />
             <EmailInput label="Email" placeholder="Enter your email" value="john.doe@example.com" size="medium" className="mb-4" />
             <AutocompleteInput label="Role" placeholder="Select your role" value="Admin" size="medium" className="mb-4" options={[{ label: "Admin", value: "Admin" }, { label: "User", value: "User" }]} onChange={(e) => console.log(e)} />
@@ -221,11 +238,19 @@ export default function AdminDashboard() {
             <PasswordInput label="Password" placeholder="Enter your password" value="password" size="medium" className="mb-4" />
             <RadioInput label="Radio" value="Option 1" size="medium" className="mb-4" options={[{ label: "Option 1", value: "Option 1" }, { label: "Option 2", value: "Option 2" }]} onChange={(e) => console.log(e)} />
             <RangeSlider label="Range" value={10} min={0} max={100} size="medium" className="mb-4" />
-            <SelectInput label="Select" value="Option 1" size="medium" className="mb-4" options={[{ label: "Option 1", value: "Option 1" }, { label: "Option 2", value: "Option 2" }]} onChange={(e) => console.log(e)} />
+            <SelectInput label="Select" value="Option 1" placeholder="Select your options" size="small" className="mb-4" options={[{ label: "Option 1", value: "Option 1" }, { label: "Option 2", value: "Option 2" }]} onChange={(e) => console.log(e)} />
             <TextareaInput label="Textarea" placeholder="Enter your text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." size="medium" className="mb-4" />
             <TimeInput label="Time" value="12:00" size="medium" className="mb-4" />
             <ToggleSwitch label="Toggle" checked={true} onChange={(e) => console.log(e)} size="medium" className="mb-4" />
-            <CustomAutocompleteInput label="Custom Autocomplete" placeholder="Select your options" value="Option 1" size="medium" className="mb-4" options={[{ label: "Option 1", value: "Option 1" }, { label: "Option 2", value: "Option 2" }]} onChange={(e) => console.log(e)} />
+            <CustomAutocompleteInput label="Custom Autocomplete" placeholder="Select your options" value="Option 1" size="medium" className="mb-4" options={[{ label: "Option 1", value: "Option 1" }, { label: "Option 2", value: "Option 2" }]} onChange={(e) => console.log(e)} /> */}
+            <MultiSelectAutocompleteCheckbox
+                options={topFilms}
+                value={selectedFilms}
+                onChange={handleFilmChange}
+                label="Favorite Films (Medium)"
+                placeholder="Select films..."
+                size="small" // Explicitly set size
+            />
         </div>
     );
 } 

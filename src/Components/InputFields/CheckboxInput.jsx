@@ -1,6 +1,6 @@
 import React from "react";
 import { FormControlLabel, Checkbox } from "@mui/material";
-import { getInputStyles } from "./InputStyles/inputstyles";
+import { getCheckboxStyles } from "./InputStyles/inputstyles";
 
 const CheckboxInput = ({
   label,
@@ -12,17 +12,17 @@ const CheckboxInput = ({
 }) => {
   return (
     <FormControlLabel
-      sx={getInputStyles(size)}
+      sx={getCheckboxStyles(size)}
       control={
         <Checkbox
-          sx={getInputStyles(size)}
+          sx={getCheckboxStyles(size)}
           checked={checked}
           onChange={onChange}
           {...rest}
         />
       } // Spread the rest of the props here
       label={label}
-      className={`${className} mb-4`}
+      className={`${className}`}
     />
   );
 };

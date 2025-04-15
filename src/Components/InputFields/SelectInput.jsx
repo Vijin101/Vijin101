@@ -9,6 +9,7 @@ const SelectInput = ({
   options,
   className,
   size = "medium",
+  placeholder,
   ...rest
 }) => {
   const isFormik = Boolean(field && form); // Check if Formik is used
@@ -44,10 +45,11 @@ const SelectInput = ({
       onChange={handleChange}
       variant="outlined"
       fullWidth
-      className={`${className} mb-4`}
+      className={`${className}`}
       sx={getInputStyles(size)}
       error={error}
       helperText={helperText}
+      placeholder={placeholder}
       {...rest}
     >
       <MenuItem value="" disabled>

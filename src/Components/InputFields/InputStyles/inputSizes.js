@@ -149,3 +149,111 @@ export const chipSizes = {
         height: '36px',
     },
 };
+
+export const checkboxSizes = {
+    small: { iconSize: "16px", labelSize: "12px" },
+    medium: { iconSize: "20px", labelSize: "14px" },
+    large: { iconSize: "24px", labelSize: "16px" },
+};
+
+
+export const selectSizes = {
+    small: {
+        height: '36px',
+        fontSize: '14px',
+        padding: '3px 12px',
+        label: {
+            fontSize: '12px',
+            transform: 'translate(14px, 9px) scale(1)',
+            '&.MuiInputLabel-shrink': {
+                transform: 'translate(14px, -6px) scale(0.75)',
+            },
+        },
+        option: {
+            fontSize: '12px',
+        },
+        listbox: {
+            fontSize: '12px',
+        },
+    },
+    medium: {
+        height: '48px',
+        fontSize: '16px',
+        padding: '8px 16px',
+        label: {
+            fontSize: '14px',
+            transform: 'translate(14px, 14px) scale(1)',
+            '&.MuiInputLabel-shrink': {
+                transform: 'translate(14px, -6px) scale(0.75)', // Default label position when shrunk
+            },
+        },
+        option: {
+            fontSize: '14px',
+        },
+        listbox: {
+            fontSize: '14px',
+        },
+
+
+
+    },
+    large: {
+        height: '56px',
+        fontSize: '18px',
+        padding: '16px 20px',
+        label: {
+            fontSize: '16px',
+            transform: 'translate(14px, 18px) scale(1)', // Adjust label position
+            '&.MuiInputLabel-shrink': {
+                transform: 'translate(14px, -6px) scale(0.75)', // Adjust label position when shrunk
+            },
+        },
+        option: {
+            fontSize: '16px',
+        },
+        listbox: {
+            fontSize: '16px',
+        },
+    },
+
+};
+
+
+export const autocompleteInputSizes = {
+    small: {
+        height: '36px', // Small height
+        fontSize: '14px', // Small font size
+        padding: '3px 12px', // Small padding
+        label: {
+            fontSize: '12px', // Smaller font size for label
+            transform: 'translate(14px, 9px) scale(1)', // Adjust label position
+            '&.MuiInputLabel-shrink': {
+                transform: 'translate(14px, -6px) scale(0.75)', // Adjust label position when shrunk
+            },
+        },
+    },
+    medium: {
+        height: '48px', // Medium height
+        fontSize: '16px', // Medium font size
+        padding: '6px 16px', // Medium padding
+        label: {
+            fontSize: '14px', // Medium font size for label
+            transform: 'translate(14px, 14px) scale(1)', // Default label position
+            '&.MuiInputLabel-shrink': {
+                transform: 'translate(14px, -6px) scale(0.75)', // Default label position when shrunk
+            },
+        },
+    },
+    large: {
+        height: '56px', // Large height
+        fontSize: '18px', // Large font size
+        padding: '16px 20px', // Large padding
+        label: {
+            fontSize: '16px', // Large font size for label
+            transform: 'translate(14px, 18px) scale(1)', // Adjust label position
+            '&.MuiInputLabel-shrink': {
+                transform: 'translate(14px, -6px) scale(0.75)', // Adjust label position when shrunk
+            },
+        },
+    },
+};

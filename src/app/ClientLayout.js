@@ -30,21 +30,21 @@ export default function ClientLayout({ children }) {
     const theme = createTheme()
 
     return (
-        <body >
-            <ThemeProvider theme={theme}>
-                <ReactQueryProvider>
-                    <LayoutContextProvider>
-                        <LoadingLineReveal delay={0.5}>
-                            {!isAuthOrDashboard && <Header />}
-                            <CustomCursor />
-                            {children}
-                            {!isAuthOrDashboard && <FloatingContactButtons />}
-                            {!isAuthOrDashboard && <PageScrollUpButton />}
-                            {!isAuthOrDashboard && <Footer />}
-                        </LoadingLineReveal>
-                    </LayoutContextProvider>
-                </ReactQueryProvider>
-            </ThemeProvider>
-        </body>
+
+        <ThemeProvider theme={theme}>
+            <ReactQueryProvider>
+                <LayoutContextProvider>
+                    <LoadingLineReveal delay={0.5}>
+                        {!isAuthOrDashboard && <Header />}
+                        <CustomCursor />
+                        {children}
+                        {!isAuthOrDashboard && <FloatingContactButtons />}
+                        {!isAuthOrDashboard && <PageScrollUpButton />}
+                        {!isAuthOrDashboard && <Footer />}
+                    </LoadingLineReveal>
+                </LayoutContextProvider>
+            </ReactQueryProvider>
+        </ThemeProvider>
+
     );
 }

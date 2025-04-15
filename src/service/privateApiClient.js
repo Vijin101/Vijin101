@@ -2,6 +2,7 @@
 import axios from "axios";
 import { API_BASE_URL, DEFAULT_HEADERS } from "../config/apiUrl";
 import { refreshToken } from "./authService";
+import { useAuthStore } from "../store";
 
 
 
@@ -18,23 +19,43 @@ privateApiClient.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
 
-        // If 401 (Unauthorized) and the request was not retried yet
-        if (error.response?.status === 401 && !originalRequest._retry) {
-            originalRequest._retry = true; // Prevent infinite retry loop
-            try {
-                await refreshToken(); // ✅ Automatically refresh access token
+        if (error.response) {
+            const { status } = error.response;
 
-                // Retry the failed request (tokens are sent automatically)
-                return privateApiClient(originalRequest);
-            } catch (refreshError) {
-                console.error("Token refresh failed:", refreshError);
-                window.location.href = "/signin"; // Redirect to login
-                return Promise.reject(refreshError);
+            if (status === 401 && !originalRequest._retry) {
+                originalRequest._retry = true;
+                try {
+                    await refreshToken();
+                    return privateApiClient(originalRequest);
+                } catch (refreshError) {
+                    console.error("Token refresh failed:", refreshError);
+                    useAuthStore.setState((state) => ({
+                        ...state,
+                        user: null,
+                        isAuthenticated: false,
+                    }));
+                    return Promise.reject(refreshError);
+                }
+            }
+
+            // Handle other error cases
+            if (status === 403) {
+                console.warn("Access Denied: Logging out user.");
+                useAuthStore.setState((state) => ({
+                    ...state,
+                    user: null,
+                    isAuthenticated: false,
+                }));
+            }
+
+            if (status >= 500) {
+                console.error("Server error:", error.response.data.message || "Unexpected Error");
             }
         }
 
         return Promise.reject(error);
     }
 );
+
 
 export default privateApiClient;

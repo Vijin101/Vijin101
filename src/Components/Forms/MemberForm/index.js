@@ -53,7 +53,8 @@ const MemberForm = ({ onSubmit, onCancel, initialData = null }) => {
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting
+                isSubmitting,
+                setSubmitting
             }) => (
                 <Form onSubmit={handleSubmit} className="member-form">
                     <Row className="mb-4">
@@ -157,6 +158,7 @@ const MemberForm = ({ onSubmit, onCancel, initialData = null }) => {
                     <div className="form-actions">
                         <OutlineIconButtonWithLabel
                             label="Cancel"
+                            disabled
                             onClick={onCancel}
                             icon={<FaTimes className="me-2" />}
                         />

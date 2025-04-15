@@ -1,5 +1,5 @@
 import { themeColors } from '../../../config/themeColors';
-import { inputSizes, textareaSizes, radioSizes, toggleSwitchSizes, chipSizes } from './inputSizes';
+import { inputSizes, textareaSizes, radioSizes, toggleSwitchSizes, chipSizes, checkboxSizes, selectSizes, autocompleteInputSizes } from './inputSizes';
 
 export const getInputStyles = (size = 'medium') => ({
     backgroundColor: themeColors.backgroundLight, // Light background
@@ -133,5 +133,100 @@ export const getChipStyles = (size = 'medium') => ({
     },
 
 
+});
+
+export const getCheckboxStyles = (size = "medium") => ({
+    "& .MuiSvgIcon-root": {
+        fontSize: checkboxSizes[size].iconSize, // Dynamic icon size
+        color: themeColors.primary, // Default tick color
+
+    },
+    "& .Mui-checked .MuiSvgIcon-root": {
+        color: themeColors.secondary // Change only the tick mark color when checked
+    },
+    "& .Mui-checked": {
+        color: themeColors.primary + " !important", // Primary color when checked
+
+    },
+    "&:hover .Mui-checked": {
+        color: themeColors.secondary + " !important", // Secondary color on hover
+    },
+    "& .MuiFormControlLabel-label": {
+        fontSize: checkboxSizes[size].labelSize, // Dynamic label size
+        color: themeColors.textDark,
+    },
+});
+
+export const getSelectStyles = (size = "medium") => ({
+    "& .MuiOutlinedInput-root": {
+        height: selectSizes[size].height, // Dynamic height
+        fontSize: selectSizes[size].fontSize, // Dynamic font size
+        padding: selectSizes[size].padding, // Dynamic padding
+    },
+    "& .MuiInputLabel-root": {
+        color: themeColors.textDark,
+        fontSize: selectSizes[size].label.fontSize, // Dynamic font size for label
+        transform: selectSizes[size].label.transform, // Dynamic label position
+    },
+    "& .MuiOutlinedInput-input": {
+        color: themeColors.textDark,
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: themeColors.accentLight, // Light accent border
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+        borderColor: themeColors.accent, // Darker accent on hover
+    },
+    "& .MuiAutocomplete-inputRoot": {
+        padding: selectSizes[size].padding, // Dynamic padding
+    },
+    "& .MuiAutocomplete-input": {
+        padding: selectSizes[size].padding, // Dynamic padding
+    },
+    "& .MuiAutocomplete-option": {
+        fontSize: selectSizes[size].option.fontSize, // Dynamic font size for option
+    },
+    "& .MuiAutocomplete-listbox": {
+        fontSize: selectSizes[size].option.fontSize, // Dynamic font size for option
+    },
+    "& .MuiAutocomplete-option": {
+        fontSize: selectSizes[size].option.fontSize, // Dynamic font size for option
+    },
+
+
+});
+
+
+export const getAutocompleteInputStyles = (size = "medium") => ({
+    backgroundColor: themeColors.backgroundLight, // Light background
+    color: themeColors.textDark + ' !important', // Dark text
+    '& .MuiOutlinedInput-root': {
+        height: autocompleteInputSizes[size].height, // Dynamic height
+        fontSize: autocompleteInputSizes[size].fontSize, // Dynamic font size
+        padding: autocompleteInputSizes[size].padding, // Dynamic padding
+        '& fieldset': {
+            borderColor: themeColors.accentLight, // Light accent border
+        },
+        '&:hover fieldset': {
+            borderColor: themeColors.accent, // Darker accent on hover
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: themeColors.secondary, // Secondary color on focus
+        },
+    },
+    '& .MuiOutlinedInput-input': {
+        color: themeColors.textDark
+    },
+    '& .MuiInputLabel-root': {
+        color: themeColors.textDark,
+        fontSize: autocompleteInputSizes[size].label.fontSize, // Dynamic font size for label
+        transform: autocompleteInputSizes[size].label.transform, // Dynamic label position
+        '&.Mui-focused': {
+            color: themeColors.secondary, // Secondary color on focus
+        },
+        '&.MuiInputLabel-shrink': {
+            transform: autocompleteInputSizes[size].label['&.MuiInputLabel-shrink'].transform, // Adjust label position when shrunk
+        },
+    },
 });
 

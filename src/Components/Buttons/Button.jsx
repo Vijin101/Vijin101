@@ -7,6 +7,7 @@ import {
 } from "./ButtonConfig/buttonStyle";
 
 const PrimaryButton = ({
+  icon,
   label,
   loading = false,
   onClick,
@@ -24,7 +25,39 @@ const PrimaryButton = ({
       {...rest}
       sx={getButtonStyles(size, color)}
     >
-      {loading ? <CircularProgress size={24} color="inherit" /> : label}
+      {loading ? (
+        <CircularProgress size={20} color="inherit" sx={{ mr: 1 }} />
+      ) : (
+        icon
+      )}{" "}
+      {label}
+    </Button>
+  );
+};
+
+const SecondaryButton = ({
+  icon,
+  label,
+  loading = false,
+  onClick,
+  size = "medium",
+  color = "secondary",
+  ...rest
+}) => {
+  return (
+    <Button
+      variant="contained"
+      onClick={onClick}
+      disabled={loading}
+      {...rest}
+      sx={getButtonStyles(size, color)}
+    >
+      {loading ? (
+        <CircularProgress size={20} color="inherit" sx={{ mr: 1 }} />
+      ) : (
+        icon
+      )}{" "}
+      {label}
     </Button>
   );
 };
@@ -158,4 +191,5 @@ export {
   OutlineSecondaryButton,
   IconButtonWithLabel,
   OutlineIconButtonWithLabel,
+  SecondaryButton,
 };

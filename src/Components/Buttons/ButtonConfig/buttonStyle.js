@@ -7,20 +7,20 @@ export const getButtonStyles = (size = "medium", color = "primary") => {
         fontSize: buttonSizes[size].fontSize,
         padding: buttonSizes[size].padding,
         backgroundColor: `${themeColors[color] || themeColors.primary} !important`,
-        color: themeColors.backgroundLight, // Ensures contrast
-        transition: "background-color 0.3s, transform 0.2s",
+        color: `${themeColors.backgroundLight} !important`,
+        transition: "background-color 0.3s !important, transform 0.2s !important",
         "&:hover": {
             backgroundColor: `${themeColors[`${color}Hover`] || themeColors.primaryHover} !important`,
-            transform: "scale(1.005)",
+            transform: "scale(1.005) !important",
         },
         "&:active": {
             backgroundColor: `${themeColors[`${color}Active`] || themeColors.primaryActive} !important`,
-            transform: "scale(0.95)",
+            transform: "scale(0.95) !important",
         },
         "&.Mui-disabled": {
             backgroundColor: `${themeColors.neutralLight} !important`,
             color: `${themeColors.neutralDark} !important`,
-            cursor: "not-allowed",
+            cursor: "not-allowed !important",
         },
     };
 };
@@ -30,44 +30,44 @@ export const getOutlineButtonStyles = (size = "medium", color = "secondary") => 
         height: buttonSizes[size].height,
         fontSize: buttonSizes[size].fontSize,
         padding: buttonSizes[size].padding,
-        border: `2px solid ${themeColors[color] || themeColors.secondary}`,
-        color: themeColors[color] || themeColors.secondary,
-        transition: "background-color 0.3s, transform 0.2s, border-color 0.3s",
-        backgroundColor: "transparent",
+        border: `2px solid ${themeColors[color] || themeColors.secondary} !important`,
+        color: `${themeColors[color] || themeColors.secondary} !important`,
+        transition: "background-color 0.3s !important, transform 0.2s !important, border-color 0.3s !important",
+        backgroundColor: "transparent !important",
 
         "&:hover": {
-            backgroundColor: `${themeColors[`${color}Hover`] || themeColors.accentHover}20`,
-            borderColor: themeColors[`${color}Hover`] || themeColors.accentHover,
-            transform: "scale(1.005)",
+            backgroundColor: `${themeColors[`${color}Hover`] || themeColors.accentHover}20 !important`,
+            borderColor: `${themeColors[`${color}Hover`] || themeColors.accentHover} !important`,
+            transform: "scale(1.005) !important",
         },
         "&:active": {
-            backgroundColor: `${themeColors[`${color}Active`] || themeColors.accentActive}30`,
-            transform: "scale(0.95)",
+            backgroundColor: `${themeColors[`${color}Active`] || themeColors.accentActive}30 !important`,
+            transform: "scale(0.95) !important",
         },
         "&.Mui-disabled": {
-            borderColor: themeColors.neutralLight,
-            color: themeColors.neutralDark,
-            cursor: "not-allowed",
+            borderColor: `${themeColors.neutralLight} !important`,
+            color: `${themeColors.neutralDark} !important`,
+            cursor: "not-allowed !important",
         },
     };
 };
 
 export const getIconButtonStyles = (size = "medium", color = "primary") => {
     return {
-        height: iconButtonSizes[size].height,
-        width: iconButtonSizes[size].width,
-        fontSize: iconButtonSizes[size].fontSize,
-        padding: iconButtonSizes[size].padding,
+        height: `${iconButtonSizes[size].height} !important`,
+        width: `${iconButtonSizes[size].width} !important`,
+        fontSize: `${iconButtonSizes[size].fontSize} !important`,
+        padding: `${iconButtonSizes[size].padding} !important`,
         backgroundColor: `${themeColors[color] || themeColors.primary} !important`,
-        color: themeColors.backgroundLight,
-        transition: "background-color 0.3s, transform 0.2s",
+        color: `${themeColors.backgroundLight} !important`,
+        transition: "background-color 0.3s !important, transform 0.2s !important",
         "&:hover": {
             backgroundColor: `${themeColors[`${color}Hover`] || themeColors.primaryHover} !important`,
-            transform: "scale(1.005)",
+            transform: "scale(1.005) !important",
         },
         "&:active": {
             backgroundColor: `${themeColors[`${color}Active`] || themeColors.primaryActive} !important`,
-            transform: "scale(0.95)",
+            transform: "scale(0.95) !important",
         },
     };
-};  
+};

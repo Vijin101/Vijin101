@@ -1,6 +1,11 @@
 // ✅ layout.js (Server Component)
 import "./globals.css";
 
+export const viewport = {
+  themeColor: '#1a1a1a',
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata = {
   title: "CEA Church",
@@ -24,11 +29,10 @@ export const metadata = {
     ]
   },
   manifest: '/site.webmanifest',
-  themeColor: '#1a1a1a',
-  backgroundColor: '#1a1a1a'
+  // Removed themeColor and backgroundColor from here
 };
 
-import ClientLayout from "./ClientLayout"; // Import the new client component
+import ClientLayout from "./ClientLayout";
 
 export default function RootLayout({ children }) {
   return (

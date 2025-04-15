@@ -1,0 +1,20 @@
+/* Header Styles */
+.dashboard-header-section {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--primary-dark) 100%
+  );
+  margin: 0;
+  padding: 2rem;
+  color: var(--bg-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-page-title {
+  color: var(--bg-light);
+  font-family: var(--font-title);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}

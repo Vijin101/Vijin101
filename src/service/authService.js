@@ -1,6 +1,7 @@
 import publicApiClient from "./publicApiClient";
 import { endpoints } from "../config/apiUrl";
 import privateApiClient from "./privateApiClient";
+import { decrypt } from "../config/encryption";
 // Example: Login API Call
 export const signUpApi = async (credentials) => {
     const response = await publicApiClient.post(endpoints.auth.signup, credentials);
@@ -10,7 +11,10 @@ export const signUpApi = async (credentials) => {
 // Example: Login API Call
 export const loginApi = async (credentials) => {
     const response = await publicApiClient.post(endpoints.auth.login, credentials);
-    return response.data;
+    if (process.env.NODE_ENV !== 'production') {
+        return response.data;
+    }
+    return decrypt(response.data.data);
 };
 
 // Example: Login API Call
@@ -21,8 +25,13 @@ export const emailVerification = async (token) => {
 
 // Refresh access token
 export const refreshToken = async () => {
-    const response = await publicApiClient.get(endpoints.auth.refresh);
-    return response.data; // Assuming the new access token is in `response.data.accessToken`
+    try {
+        const response = await publicApiClient.get(endpoints.auth.refresh);
+        return response.data;
+    } catch (error) {
+        console.error("Refresh token error:", error.response?.data || error.message);
+        throw error;
+    }
 };
 
 // Logout user
@@ -35,6 +44,11 @@ export const logoutApi = async () => {
 
 // validate token user
 export const validateTokenApi = async () => {
+    console.log("validateTokenApi");
     const response = await privateApiClient.get(endpoints.auth.validateToken);
-    return response.data;
+    if (process.env.NODE_ENV !== 'production') {
+        return response.data;
+    }
+    const data = decrypt(response.data.data);
+    return data
 };

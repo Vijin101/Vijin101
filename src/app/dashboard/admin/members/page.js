@@ -10,10 +10,13 @@ import MemberForm from '../../../../Components/Forms/MemberForm';
 import './members.css';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { createUserApi, deleteUserApi, getAllUsersApi, updateUserApi } from '../../../../service/userService';
+import { getUserStatsAnalytics } from '../../../../service/analyticsService';
 import TextInput from '../../../../Components/InputFields/TextInput';
 import CustomAutocompleteInput from '../../../../Components/InputFields/CustomAutocompleteInput';
-import { IconButtonWithLabel } from '../../../../Components/Buttons/Button';
+import { SecondaryButton, OutlineSecondaryButton, } from '../../../../Components/Buttons/Button';
 import { useLayout } from '../../../../context/LayoutContext';
+import { Skeleton } from '@mui/material';
+import DashboardHeader from '../../../../Components/Header/DashboardHeader/DashboardHeader';
 // Create paginated version of MembersTable
 const PaginatedMembersTable = withPagination(MembersTable);
 
@@ -30,12 +33,19 @@ const MembersManagement = () => {
         user_status: [], // Empty array instead of null
 
     });
+
     const [userStatus, setUserStatus] = useState([]);
     const [role, setRole] = useState([]);
 
     const { data: usersData, isLoading, error, refetch } = useQuery({
         queryKey: ['users', filter], // `filter` ensures re-fetching when values change
         queryFn: () => getAllUsersApi(filter), // Directly pass `filter`
+        keepPreviousData: true,
+    });
+
+    const { data: analyticsData, isLoading: isAnalyticsLoading, error: analyticsError, refetch: refetchAnalytics } = useQuery({
+        queryKey: ['analytics'],
+        queryFn: getUserStatsAnalytics,
         keepPreviousData: true,
     });
 
@@ -84,13 +94,6 @@ const MembersManagement = () => {
         },
     });
 
-    useEffect(() => {
-        refetch();
-    }, [filter]);
-
-    console.log(usersData);
-    console.log(isLoading);
-
     const handleAddMember = (formData) => {
         console.log(formData, "formData");
         if (selectedMember) {
@@ -100,10 +103,6 @@ const MembersManagement = () => {
         }
     };
 
-    const handleEditMember = (member) => {
-        setSelectedMember(member);
-        setShowDrawer(true);
-    };
 
     const handleDeleteMember = (memberId) => {
         // Handle deleting member
@@ -121,22 +120,45 @@ const MembersManagement = () => {
         setShowDrawer(true)
     }
 
+    const handleResetFilter = () => {
+        setFilter({ ...filter, search: "", role_name: [], user_status: [] })
+        setUserStatus([])
+        setRole([])
+    }
+
+    const handleExport = () => {
+        console.log("Export");
+        getAllUsersApi({ ...filter, download: "1" }).then((res) => {
+            // Check the response structure
+            console.log("API Response:", res);
+
+            // Ensure res.data.content is a valid buffer
+            if (res.data && res.data.content) {
+                // Convert the Buffer to Uint8Array
+                const uint8Array = new Uint8Array(res.data.content.data); // Access the data array
+
+                const blob = new Blob([uint8Array], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = res.data.filename || 'default_filename.xlsx'; // Fallback filename
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } else {
+                console.error("Invalid response structure:", res);
+            }
+        }).catch(error => {
+            console.error("Error fetching users:", error);
+        });
+    };
+
+    console.log(analyticsData);
     return (
-        <Container fluid className="members-page py-4">
+        <Container className="members-page">
             {/* Header Section */}
-            <Row className="mb-4 align-items-center">
-                <Col>
-                    <h4 className="page-title mb-0">Members Management</h4>
-                    <p className="page-subtitle">Manage and track church members</p>
-                </Col>
-                <Col xs="auto">
-                    <IconButtonWithLabel
-                        label="Add New Member"
-                        onClick={() => handleDrawer(null, "add")}
-                        icon={<FaPlus className="me-2" />}
-                    />
-                </Col>
-            </Row>
+
+            <DashboardHeader title="Members Management" isButton={true} onClick={() => handleDrawer(null, "add")} icon={<FaPlus className="me-2" />} label={"Add New Member"} />
+
 
             {/* Stats Cards */}
             <Row className="mb-4">
@@ -144,8 +166,9 @@ const MembersManagement = () => {
                     <Card className="stat-card">
                         <Card.Body>
                             <div className="stat-label">Total Members</div>
-                            <div className="stat-value">1,234</div>
-                            <div className="stat-change positive">+12% from last month</div>
+                            {/* better loading   */}
+                            {isAnalyticsLoading ? <Skeleton variant="text" className="stat-value" /> : <div className="stat-value">{analyticsData?.data?.totalUsers}</div>}
+                            <div className="stat-change positive">{analyticsData?.data?.lastMonthUsersPercentageMessage}</div>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -153,8 +176,8 @@ const MembersManagement = () => {
                     <Card className="stat-card">
                         <Card.Body>
                             <div className="stat-label">Active Members</div>
-                            <div className="stat-value">1,021</div>
-                            <div className="stat-change positive">+5% from last month</div>
+                            {isAnalyticsLoading ? <Skeleton variant="text" className="stat-value" /> : <div className="stat-value">{analyticsData?.data?.activeUsers}</div>}
+                            <div className="stat-change positive">{analyticsData?.data?.activeUsersPercentageMessage}</div>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -162,8 +185,8 @@ const MembersManagement = () => {
                     <Card className="stat-card">
                         <Card.Body>
                             <div className="stat-label">New Members</div>
-                            <div className="stat-value">48</div>
-                            <div className="stat-change positive">+8% from last month</div>
+                            {isAnalyticsLoading ? <Skeleton variant="text" className="stat-value" /> : <div className="stat-value">{analyticsData?.data?.newUsers}</div>}
+                            <div className="stat-change positive">{analyticsData?.data?.newUsersPercentageMessage}</div>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -171,8 +194,8 @@ const MembersManagement = () => {
                     <Card className="stat-card">
                         <Card.Body>
                             <div className="stat-label">Attendance Rate</div>
-                            <div className="stat-value">85%</div>
-                            <div className="stat-change positive">+3% from last month</div>
+                            {isAnalyticsLoading ? <Skeleton variant="text" className="stat-value" /> : <div className="stat-value">{analyticsData?.data?.activeUsersInLast30DaysPercentage}%</div>}
+                            <div className="stat-change positive">{analyticsData?.data?.activeUsersInLast30DaysPercentageMessage}</div>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -186,16 +209,31 @@ const MembersManagement = () => {
                             <TextInput size="small" label="Search" placeholder="Search members..." value={filter.search} onChange={(e) => setFilter({ ...filter, search: e.target.value })} iconLeft={<FaSearch />} />
                         </Col>
                         <Col md={2}>
-                            <CustomAutocompleteInput options={[{ label: "Active", value: "1" }, { label: "Inactive", value: "2" }, { label: "Blocked", value: "3" }]} size="small" label="User Status" placeholder="Select user status" value={userStatus} onChange={(e) => { setUserStatus(e); setFilter({ ...filter, user_status: e.map(item => item.value) }) }} />
+                            <CustomAutocompleteInput options={[{ label: "Active", value: "1" }, { label: "Inactive", value: "2" }, { label: "Blocked", value: "3" }]} size="small" label="User Status" placeholder="Select user status" value={userStatus} onChange={(selectedValues) => { setUserStatus(selectedValues); setFilter({ ...filter, user_status: selectedValues }) }} />
                         </Col>
                         <Col md={2}>
-                            <CustomAutocompleteInput options={[{ label: "User", value: "User" }, { label: "Admin", value: "Admin" }, { label: "Super Admin", value: "Super Admin" }]} size="small" label="Role" placeholder="Select role" value={role} onChange={(e) => { setRole(e); setFilter({ ...filter, role_name: e.map(item => item.value) }) }} />
+                            <CustomAutocompleteInput
+                                options={[
+                                    { label: "User", value: "User" },
+                                    { label: "Admin", value: "Admin" },
+                                    { label: "Super Admin", value: "Super Admin" }
+                                ]}
+                                size="small"
+                                label="Role"
+                                placeholder="Select role"
+                                value={role}
+                                onChange={(selectedValues) => {
+
+                                    setRole(selectedValues);
+
+                                    setFilter({ ...filter, role_name: selectedValues })
+                                }}
+                            />
                         </Col>
                         <Col md={5} className="text-md-end">
-                            <Button variant="outline-secondary" className="me-2">
-                                <FaDownload className="me-2" />
-                                Export
-                            </Button>
+                            {/* reset filter     */}
+                            <OutlineSecondaryButton label="Reset" className="me-2" size="small" color="primary" onClick={handleResetFilter} />
+                            <OutlineSecondaryButton label="Export" size="small" color="primary" onClick={handleExport} />
                         </Col>
                     </Row>
                 </Card.Body>
@@ -205,12 +243,13 @@ const MembersManagement = () => {
             <Card className="members-table-card">
                 <Card.Body className="p-0">
                     <PaginatedMembersTable
-                        size="medium"
+                        size="small"
                         data={usersData?.data?.users || []}
                         itemsPerPage={filter.limit}
                         onEdit={handleDrawer}
                         totalPages={usersData?.data?.totalPages}
                         setFilter={setFilter}
+                        filter={filter}
                         loading={isLoading}
                         onDelete={handleDeleteMember}
                     />

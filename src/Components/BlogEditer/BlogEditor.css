@@ -1,0 +1,31 @@
+.MuiTiptap-RichTextField-menuBar.blog-editor-menu-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--accent-light);
+  color: white;
+}
+
+.MuiTiptap-FieldContainer-notchedOutline {
+  border: none !important;
+}
+
+.MuiTiptap-RichTextContent-root.MuiTiptap-RichTextField-content {
+  max-height: 500px;
+  min-height: 500px;
+  overflow-y: auto;
+  background-color: var(--bg-light);
+}
+
+.blog-editor-container .MuiInputBase-root .MuiOutlinedInput-notchedOutline {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.blog-editor-container
+  .MuiInputBase-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border: none !important;
+  box-shadow: none !important;
+}

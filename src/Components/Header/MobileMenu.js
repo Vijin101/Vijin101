@@ -52,9 +52,8 @@ const MobileMenu = ({ menus }) => {
           <li key={i} className="">
             <Link
               onClick={() => setIsOpen(false)}
-              className={`nav-menu-item p-3 ${
-                activeRoute(e.path) ? 'active' : ''
-              }`}
+              className={`nav-menu-item p-3 ${activeRoute(e.path) ? 'active' : ''
+                }`}
               href={e.path}
             >
               {e.name}
@@ -64,10 +63,9 @@ const MobileMenu = ({ menus }) => {
         <li key={'login'} className="">
           <Link
             onClick={() => setIsOpen(false)}
-            className={`text-white hover:text-gray-300 nav-menu-item p-3 ${
-              activeRoute('/login') ? 'active' : ''
-            }`}
-            href={'/login'}
+            className={`text-white hover:text-gray-300 nav-menu-item p-3 ${activeRoute('/auth/login') ? 'active' : ''
+              }`}
+            href={'/auth/login'}
           >
             Login
           </Link>

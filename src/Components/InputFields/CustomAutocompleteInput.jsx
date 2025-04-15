@@ -1,80 +1,97 @@
 import React from "react";
-import { Autocomplete, TextField, Checkbox } from "@mui/material";
+import {
+  TextField,
+  MenuItem,
+  Checkbox,
+  ListItemText,
+  Chip,
+  Box,
+} from "@mui/material";
 import { getInputStyles } from "./InputStyles/inputstyles";
 
 const CustomAutocompleteInput = ({
+  field = null,
+  form = null,
   label,
-  placeholder,
-  value,
-  onChange,
   options,
   className,
   size = "medium",
-  multiple = true,
+  onChange = () => {},
+  placeholder,
+  value: propValue,
   ...rest
 }) => {
-  // Ensure value is always an array
-  const normalizedValue = Array.isArray(value) ? value : value ? [value] : [];
+  const isFormik = Boolean(field && form);
+  const [localValue, setLocalValue] = React.useState([]);
+
+  const name = field?.name || rest.name;
+  const value = isFormik ? field.value || [] : propValue || localValue;
+  const error = isFormik
+    ? form.touched?.[name] && Boolean(form.errors?.[name])
+    : false;
+  const helperText = isFormik
+    ? (form.touched?.[name] && form.errors?.[name]) || ""
+    : "";
+
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+    const valueArray =
+      typeof newValue === "string"
+        ? newValue.split(",")
+        : Array.isArray(newValue)
+        ? newValue
+        : [newValue];
+
+    if (isFormik) {
+      form.setFieldValue(name, valueArray);
+    } else {
+      setLocalValue(valueArray);
+      onChange(valueArray);
+    }
+  };
 
   return (
-    <Autocomplete
-      multiple={multiple}
-      value={normalizedValue}
-      onChange={(event, newValue) => onChange(newValue)}
-      options={options}
-      disableCloseOnSelect
-      getOptionLabel={(option) => option.label || option}
-      isOptionEqualToValue={(option, selectedValue) =>
-        option.value === selectedValue.value
-      }
-      renderOption={(props, option, { selected }) => (
-        <li {...props}>
-          <Checkbox checked={selected} style={{ marginRight: 8 }} />
-          {option.label || option}
-        </li>
-      )}
-      renderInput={(params) => {
-        const selectedText = normalizedValue
-          .map((option) => option.label || option)
-          .join(", ");
-
-        return (
-          <TextField
-            {...params}
-            label={label}
-            placeholder={normalizedValue.length === 0 ? placeholder : ""}
-            variant="outlined"
-            fullWidth
-            sx={{
-              ...getInputStyles(size),
-              "& .MuiInputBase-input": {
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-              },
-            }}
-            className={`${className}`}
-            InputProps={{
-              ...params.InputProps,
-              startAdornment: (
-                <span
-                  style={{
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    display: "block",
-                    maxWidth: "calc(100% - 32px)",
-                  }}
-                >
-                  {selectedText}
-                </span>
-              ),
-            }}
-          />
-        );
+    <TextField
+      select
+      SelectProps={{
+        multiple: true,
+        renderValue: (selected) => (
+          <span>
+            {selected.length > 0
+              ? `${selected.length} selected`
+              : "Select items"}
+          </span>
+        ),
       }}
+      label={label}
+      name={name}
+      value={Array.isArray(value) ? value : []}
+      onChange={handleChange}
+      variant="outlined"
+      fullWidth
+      className={`${className}`}
+      sx={{
+        ...getInputStyles(size),
+        "& .MuiSelect-select": {
+          paddingTop: "8px",
+          paddingBottom: "8px",
+          minHeight: "auto !important",
+        },
+      }}
+      error={error}
+      helperText={helperText}
+      placeholder={placeholder}
       {...rest}
-    />
+    >
+      {options.map((option) => (
+        <MenuItem key={option.value} value={option.value}>
+          <Checkbox
+            checked={Array.isArray(value) && value.includes(option.value)}
+          />
+          <ListItemText primary={option.label} />
+        </MenuItem>
+      ))}
+    </TextField>
   );
 };
 

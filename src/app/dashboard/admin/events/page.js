@@ -6,86 +6,125 @@ import { FaPlus, FaSearch, FaFilter, FaCalendar, FaClock, FaMapMarkerAlt, FaUser
 import Drawer from '../../../../Components/Drawer';
 import withPagination from '../../../../Components/Pagination';
 import './events.css';
+import EventForm from '../../../../Components/Forms/EventForm';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { createEventApi, deleteEventApi, getAllEventsApi, updateEventApi } from '../../../../service/eventService';
+import { useLayout } from '../../../../context/LayoutContext';
+import DashboardHeader from '../../../../Components/Header/DashboardHeader/DashboardHeader';
+import AdminEventFilter from '../../../../Components/Filters/AdminEventFilter/AdminEventFilter';
 
 const EventsManagement = () => {
+    const { showNotification } = useLayout();
     const [showDrawer, setShowDrawer] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [filterType, setFilterType] = useState('all');
+    const [expandedEventId, setExpandedEventId] = useState(null);
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [drawerTitle, setDrawerTitle] = useState("Add New Event");
+    const [filter, setFilter] = useState({
+        page: 1,
+        limit: 1,
+        search: "", // Avoid `null`, use an empty string
+        status: null, // Empty array instead of null
+        type: [], // Empty array instead of null
+    });
+    const [type, setType] = useState([]);
 
-    // Sample events data
-    const events = [
-        {
-            id: 1,
-            title: 'Sunday Service',
-            description: 'Weekly Sunday worship service with praise and worship, sermon, and fellowship.',
-            date: '2024-03-24',
-            time: '10:00 AM',
-            location: 'Main Sanctuary',
-            attendees: 150,
-            type: 'service',
-            status: 'upcoming'
+    const { data: eventsData, isLoading, error, refetch } = useQuery({
+        queryKey: ['events', filter], // `filter` ensures re-fetching when values change
+        queryFn: () => getAllEventsApi(filter), // Directly pass `filter`
+        keepPreviousData: true,
+    });
+
+    const { mutate: createEvent, isPending: isCreating } = useMutation({
+        mutationFn: createEventApi,
+        onSuccess: () => {
+            console.log('User created successfully');
+            refetch();
+            setShowDrawer(false);
+            setSelectedEvent(null);
+            setDrawerTitle("Add New Event");
+            showNotification("Event created successfully", "success");
         },
-        {
-            id: 2,
-            title: 'Youth Bible Study',
-            description: 'Weekly Bible study session for youth members focusing on contemporary issues.',
-            date: '2024-03-25',
-            time: '6:00 PM',
-            location: 'Youth Center',
-            attendees: 45,
-            type: 'study',
-            status: 'upcoming'
+        onError: (error) => {
+            console.error('Error creating event:', error);
+            showNotification("Error creating event", "error");
         },
-        {
-            id: 3,
-            title: 'Prayer Meeting',
-            description: 'Monthly prayer meeting for church members to come together in prayer.',
-            date: '2024-03-26',
-            time: '7:00 PM',
-            location: 'Prayer Room',
-            attendees: 30,
-            type: 'prayer',
-            status: 'ongoing'
+    });
+
+    const { mutate: updateEvent, isPending: isUpdating } = useMutation({
+        mutationFn: updateEventApi,
+        onSuccess: () => {
+            console.log('User updated successfully');
+            refetch();
+            setShowDrawer(false);
+            setSelectedEvent(null);
+            setDrawerTitle("Add New Event");
+            showNotification("Event updated successfully", "success");
         },
-        {
-            id: 4,
-            title: 'Choir Practice',
-            description: 'Weekly choir practice session for Sunday service preparation.',
-            date: '2024-03-27',
-            time: '5:00 PM',
-            location: 'Music Room',
-            attendees: 25,
-            type: 'practice',
-            status: 'completed'
-        }
-    ];
+        onError: (error) => {
+            console.error('Error updating event:', error);
+            showNotification("Error updating event", "error");
+        },
+    });
 
-    // Filter events based on search term and type
-    const filteredEvents = events.filter(event => {
-        const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            event.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            event.location.toLowerCase().includes(searchTerm.toLowerCase());
-
-        const matchesType = filterType === 'all' || event.type === filterType;
-
-        return matchesSearch && matchesType;
+    const { mutate: deleteEvent, isPending: isDeleting } = useMutation({
+        mutationFn: deleteEventApi,
+        onSuccess: () => {
+            console.log('Eent deleted successfully');
+            refetch();
+            showNotification("Event deleted successfully", "success");
+        },
+        onError: (error) => {
+            console.error('Error deleting event:', error);
+            showNotification("Error deleting event", "error");
+        },
     });
 
     const handleAddEvent = (formData) => {
         // Handle adding new event
         console.log('New event data:', formData);
-        setShowDrawer(false);
+        // setShowDrawer(false);
+
+        if (!formData.isMultiDay) {
+            formData.endDate = null;
+            formData.endTime = null;
+            formData.schedule = null;
+        }
+
+        if (selectedEvent) {
+            updateEvent({ id: selectedEvent.event_id, data: formData });
+        } else {
+            createEvent(formData);
+        }
     };
 
-    const handleEditEvent = (event) => {
-        // Handle editing event
-        console.log('Edit event:', event);
-    };
+
 
     const handleDeleteEvent = (eventId) => {
         // Handle deleting event
         console.log('Delete event:', eventId);
+        deleteEvent(eventId);
+        setExpandedEventId(null); // Close the expanded card if it's open
     };
+
+    const handleDrawer = (event, type = "add") => {
+
+        if (type == "add") {
+            setDrawerTitle("Add New Event")
+            setSelectedEvent(null);
+        } else {
+            console.log("event", event);
+            setSelectedEvent(event);
+            setDrawerTitle("Edit Event")
+
+        }
+        setShowDrawer(true)
+    }
+
+    const handleResetFilter = () => {
+        setFilter({ ...filter, search: "", role_name: [], user_status: [] })
+        setUserStatus([])
+        setRole([])
+    }
 
     const getStatusBadge = (status) => {
         const statusColors = {
@@ -116,137 +155,209 @@ const EventsManagement = () => {
 
     const EventList = ({ data = [] }) => {
         return (
-            <Row>
-                {data && data.length > 0 ? (
-                    data.map((event) => (
-                        <Col key={event.id} md={6} lg={4} className="mb-4">
-                            <Card className="event-card">
+            <>
+                {expandedEventId && (
+                    <div
+                        className="card-expansion-backdrop"
+                        onClick={() => setExpandedEventId(null)}
+                        onKeyDown={(e) => e.key === 'Escape' && setExpandedEventId(null)}
+                        tabIndex={0}
+                        aria-label="Close expanded event"
+                    />
+                )}
+                <Row>
+                    {data && data.length > 0 ? (
+                        data.map((event) => (
+                            <Col
+                                key={event.id}
+                                md={6}
+                                lg={4}
+                                className="mb-4"
+                                style={
+                                    expandedEventId === event.id
+                                        ? { zIndex: 100, position: 'relative' }
+                                        : {}
+                                }
+                            >
+                                <Card
+                                    className={`event-card ${expandedEventId === event.id ? 'expanded' : ''}`}
+                                    onClick={(e) => {
+                                        // Only expand if clicking on card body directly
+                                        const isCardBodyClick = e.target === e.currentTarget ||
+                                            e.target.classList.contains('event-description')
+
+                                        if (isCardBodyClick &&
+                                            !e.target.closest('.event-actions') &&
+                                            !e.target.closest('.schedule-toggle') &&
+                                            !e.target.closest('.schedule-content')) {
+                                            setExpandedEventId(expandedEventId === event.id ? null : event.id);
+                                        }
+                                    }}
+                                >
+                                    <Card.Body>
+                                        <Stack gap={3}>
+                                            <div className="event-header">
+                                                <h5 className="event-title">{event.title}</h5>
+                                                <div className="event-badges">
+                                                    {getStatusBadge(event.status)}
+                                                    {getTypeBadge(event.type)}
+                                                </div>
+                                            </div>
+                                            <p className="event-description">{event.description}</p>
+                                            <div className="event-details">
+                                                <div className="event-detail-item">
+                                                    <FaCalendar className="me-2" />
+                                                    {event.isMultiDay
+                                                        ? `${event.date} to ${event.endDate}`
+                                                        : event.date}
+                                                </div>
+                                                <div className="event-detail-item">
+                                                    <FaClock className="me-2" />
+                                                    {event.isMultiDay
+                                                        ? `${event.time} - ${event.endTime}`
+                                                        : `${event.time} - ${event.endTime}`}
+                                                </div>
+                                                <div className="event-detail-item">
+                                                    <FaMapMarkerAlt className="me-2" />
+                                                    {event.location}
+                                                </div>
+                                                <div className="event-detail-item">
+                                                    <FaUsers className="me-2" />
+                                                    {event.attendees} attendees
+                                                </div>
+                                            </div>
+                                            {event.isMultiDay && event.schedule && (
+                                                <div className="event-schedule">
+                                                    <button
+                                                        type="button"
+                                                        className="schedule-toggle"
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            const content = document.getElementById(`schedule-${event.id}`);
+                                                            const isShowing = content.classList.toggle('show');
+
+                                                            // Update button text
+                                                            const toggleText = isShowing
+                                                                ? 'Hide Schedule <span style="font-size:0.8em">▲</span>'
+                                                                : 'View Schedule <span style="font-size:0.8em">▼</span>';
+                                                            e.currentTarget.innerHTML = toggleText;
+
+                                                            // Ensure proper aria attributes
+                                                            e.currentTarget.setAttribute('aria-expanded', isShowing);
+                                                            content.setAttribute('aria-hidden', !isShowing);
+                                                        }}
+                                                        style={{
+                                                            background: 'none',
+                                                            border: 'none',
+                                                            color: 'var(--secondary-color)',
+                                                            cursor: 'pointer',
+                                                            padding: '0.25rem 0',
+                                                            textAlign: 'left'
+                                                        }}
+                                                    >
+                                                        View Schedule ▼
+                                                    </button>
+                                                    <div
+                                                        id={`schedule-${event.id}`}
+                                                        className="schedule-content"
+                                                        aria-hidden="true"
+                                                    >
+                                                        {event.schedule.map((daySchedule, index) => (
+                                                            <div key={index} className="day-schedule">
+                                                                <strong>{daySchedule.day}</strong>
+                                                                <ul className="activity-list">
+                                                                    {daySchedule.activities.map((activity, i) => (
+                                                                        <li key={i}>
+                                                                            <span className="activity-time">{activity.time}</span>
+                                                                            <span className="activity-desc">{activity.description}</span>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+                                            <div className="event-actions">
+                                                <Button
+                                                    variant="outline-primary"
+                                                    size="sm"
+                                                    onClick={() => handleDrawer(event, "edit")}
+                                                >
+                                                    <FaEdit className="me-1" />
+                                                    Edit
+                                                </Button>
+                                                <Button
+                                                    variant="outline-danger"
+                                                    size="sm"
+                                                    onClick={() => handleDeleteEvent(event.event_id)}
+                                                >
+                                                    <FaTrash className="me-1" />
+                                                    Delete
+                                                </Button>
+                                            </div>
+                                        </Stack>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))
+                    ) : (
+                        <Col>
+                            <Card className="text-center py-5">
                                 <Card.Body>
-                                    <Stack gap={3}>
-                                        <div className="event-header">
-                                            <h5 className="event-title">{event.title}</h5>
-                                            <div className="event-badges">
-                                                {getStatusBadge(event.status)}
-                                                {getTypeBadge(event.type)}
-                                            </div>
-                                        </div>
-                                        <p className="event-description">{event.description}</p>
-                                        <div className="event-details">
-                                            <div className="event-detail-item">
-                                                <FaCalendar className="me-2" />
-                                                {event.date}
-                                            </div>
-                                            <div className="event-detail-item">
-                                                <FaClock className="me-2" />
-                                                {event.time}
-                                            </div>
-                                            <div className="event-detail-item">
-                                                <FaMapMarkerAlt className="me-2" />
-                                                {event.location}
-                                            </div>
-                                            <div className="event-detail-item">
-                                                <FaUsers className="me-2" />
-                                                {event.attendees} attendees
-                                            </div>
-                                        </div>
-                                        <div className="event-actions">
-                                            <Button
-                                                variant="outline-primary"
-                                                size="sm"
-                                                onClick={() => handleEditEvent(event)}
-                                            >
-                                                <FaEdit className="me-1" />
-                                                Edit
-                                            </Button>
-                                            <Button
-                                                variant="outline-danger"
-                                                size="sm"
-                                                onClick={() => handleDeleteEvent(event.id)}
-                                            >
-                                                <FaTrash className="me-1" />
-                                                Delete
-                                            </Button>
-                                        </div>
-                                    </Stack>
+                                    <h4 className="text-muted">No events found</h4>
+                                    <p className="text-muted">Try adjusting your search or filter criteria</p>
                                 </Card.Body>
                             </Card>
                         </Col>
-                    ))
-                ) : (
-                    <Col>
-                        <Card className="text-center py-5">
-                            <Card.Body>
-                                <h4 className="text-muted">No events found</h4>
-                                <p className="text-muted">Try adjusting your search or filter criteria</p>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                )}
-            </Row>
+                    )}
+                </Row>
+            </>
         );
     };
 
     const PaginatedEventList = withPagination(EventList);
 
+    console.log("eventsData", eventsData);
+    console.log("isLoading", isLoading);
+    console.log("event seleceted", selectedEvent);
+
     return (
-        <Container fluid className="events-management">
-            <Row className="mb-4">
-                <Col>
-                    <h2 className="page-title">Events Management</h2>
-                </Col>
-                <Col xs="auto">
-                    <Button
-                        variant="primary"
-                        onClick={() => setShowDrawer(true)}
-                        className="add-event-btn"
-                    >
-                        <FaPlus className="me-2" />
-                        Add New Event
-                    </Button>
-                </Col>
-            </Row>
+        <Container fluid className="events-management py-4">
+            <DashboardHeader
+                title="Events Management"
+                isButton={true}
+                onClick={() => handleDrawer(null, "add")}
+                icon={<FaPlus />}
+                label="Add New Event"
+            />
+            <AdminEventFilter filter={filter} setFilter={setFilter} />
 
-            <Row className="mb-4">
-                <Col md={6}>
-                    <Form.Group className="search-box">
-                        <Form.Control
-                            type="text"
-                            placeholder="Search events..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                        <FaSearch className="search-icon" />
-                    </Form.Group>
-                </Col>
-                <Col md={6}>
-                    <Form.Group className="filter-box">
-                        <Form.Select
-                            value={filterType}
-                            onChange={(e) => setFilterType(e.target.value)}
-                        >
-                            <option value="all">All Events</option>
-                            <option value="service">Services</option>
-                            <option value="study">Bible Studies</option>
-                            <option value="prayer">Prayer Meetings</option>
-                            <option value="practice">Practices</option>
-                        </Form.Select>
-                        <FaFilter className="filter-icon" />
-                    </Form.Group>
-                </Col>
-            </Row>
-
-            <PaginatedEventList data={filteredEvents} itemsPerPage={6} />
+            <PaginatedEventList
+                data={eventsData?.data?.events || []}
+                itemsPerPage={filter.limit}
+                setFilter={setFilter}
+                filter={filter}
+                totalPages={eventsData?.data?.totalPages || 1}
+                isLoading={isLoading}
+            />
 
             <Drawer
                 show={showDrawer}
-                onHide={() => setShowDrawer(false)}
-                title="Add New Event"
+                onHide={() => { setShowDrawer(false), setSelectedEvent(null) }}
+                title={drawerTitle}
                 size="lg"
             >
-                {/* Event form will go here */}
+                <EventForm
+                    loding={isCreating || isUpdating}
+                    onSubmit={handleAddEvent}
+                    onCancel={() => { setShowDrawer(false), setSelectedEvent(null) }}
+                    initialData={selectedEvent}
+                />
             </Drawer>
         </Container>
     );
 };
 
-export default EventsManagement; 
+export default EventsManagement;

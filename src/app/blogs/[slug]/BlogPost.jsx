@@ -29,7 +29,7 @@ import styles from "./BlogPost.module.css";
 import CommentSection from "../../../Components/Comments/CommentSection";
 import { blogs } from "../data";
 
-const BlogPost = ({ slug }) => {
+const BlogPost = ({ post }) => {
   const router = useRouter();
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -88,7 +88,7 @@ const BlogPost = ({ slug }) => {
     setNewComment("");
   };
 
-  const blog = blogs.find((blog) => blog.blog_id === slug);
+  const blog = post;
 
   if (isLoading) {
     return (
@@ -115,12 +115,7 @@ const BlogPost = ({ slug }) => {
     );
   }
 
-  const relatedPosts =
-    blogs.filter(
-      (post) =>
-        post.blog_tags?.some((tag) => blog.blog_tags?.includes(tag)) &&
-        post.blog_id !== slug
-    ) || [];
+  const relatedPosts = [];
 
   const handleRelatedPostClick = (blog_id) => {
     router.push(`/blogs/${blog_id}`);
@@ -187,7 +182,7 @@ const BlogPost = ({ slug }) => {
               dangerouslySetInnerHTML={{ __html: blog.blog_content }}
             />
 
-            <CommentSection blogId={slug} />
+            <CommentSection blogId={blog.blog_id} />
           </div>
 
           <hr className="my-5" />

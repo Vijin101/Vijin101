@@ -30,7 +30,7 @@ const TextareaInput = ({
       fullWidth
       multiline
       inputRef={textAreaRef} // Attach ref for height adjustment
-      className={`${className} mb-4`}
+      className={`${className}`}
       sx={getTextareaStyles(size)}
       {...rest}
     />

@@ -1,25 +1,53 @@
 import React from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
-import { getInputStyles, getChipStyles } from "./InputStyles/inputstyles";
+import {
+  getInputStyles,
+  getChipStyles,
+  getSelectStyles,
+} from "./InputStyles/inputstyles";
 
 const MultiSelectDropdown = ({
   label,
   placeholder,
-  value,
+  value = [],
   onChange,
   options,
   className,
   size = "medium",
   ...rest
 }) => {
+  const handleChange = (event, newValue) => {
+    // Filter out duplicates
+    const uniqueValues = newValue.reduce((acc, current) => {
+      const exists = acc.some((item) =>
+        item.value && current.value
+          ? item.value === current.value
+          : item === current
+      );
+      return exists ? acc : [...acc, current];
+    }, []);
+
+    onChange(uniqueValues);
+  };
+
   return (
     <Autocomplete
       multiple
       value={value}
-      onChange={(event, newValue) => onChange(newValue)}
+      onChange={handleChange}
       options={options}
       getOptionLabel={(option) => option.label || option}
-      sx={getInputStyles(size)}
+      isOptionEqualToValue={(option, value) =>
+        option.value && value.value
+          ? option.value === value.value
+          : option === value
+      }
+      sx={{
+        ...getSelectStyles(size),
+        "& .MuiOutlinedInput-root": {
+          height: "100%",
+        },
+      }}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -27,21 +55,29 @@ const MultiSelectDropdown = ({
           placeholder={placeholder}
           variant="outlined"
           fullWidth
-          sx={getInputStyles(size)}
+          sx={{
+            ...getInputStyles(size),
+            "& .MuiOutlinedInput-root": {
+              height: "100%",
+            },
+          }}
           className={`${className} mb-4`}
         />
       )}
       renderTags={(value, getTagProps) =>
-        value.map((option, index) => (
-          <Chip
-            sx={getChipStyles(size)}
-            key={index}
-            label={option.label || option}
-            {...getTagProps({ index })}
-          />
-        ))
+        value.map((option, index) => {
+          const { key, ...tagProps } = getTagProps({ index });
+          return (
+            <Chip
+              {...tagProps}
+              key={key}
+              sx={getChipStyles(size)}
+              label={option.label || option}
+            />
+          );
+        })
       }
-      {...rest} // Spread the rest of the props here
+      {...rest}
     />
   );
 };

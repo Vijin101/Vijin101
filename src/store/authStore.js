@@ -13,7 +13,7 @@ export const useAuthStore = create((set) => ({
             if (response.data.isValid) {
                 const userData = await getUserProfile();
                 console.log(userData);
-                set({ user: userData, isAuthenticated: response.data.isValid, isLoading: false });
+                set({ user: userData.data, isAuthenticated: response.data.isValid, isLoading: false });
             }
             else {
                 set({ user: null, isAuthenticated: false, isLoading: false });
@@ -27,7 +27,12 @@ export const useAuthStore = create((set) => ({
         set({ user: userData, isAuthenticated: true, isLoading: false });
     },
 
-    logout: () => {
-        set({ user: null, isAuthenticated: false });
+    logout: async () => {
+        try {
+            await logoutApi();
+            set({ user: null, isAuthenticated: false, isLoading: false });
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
     },
 }));

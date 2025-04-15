@@ -21,7 +21,7 @@ const ToggleSwitch = ({
         />
       }
       label={label}
-      className={`${className} mb-4`}
+      className={`${className}`}
     />
   );
 };
